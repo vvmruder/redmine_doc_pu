@@ -6,7 +6,7 @@ match 'doc_pu/build', :controller => 'doc_pu', :action => 'build', :via => [:get
 match 'doc_pu/build_remote', :controller => 'doc_pu', :action => 'build_remote', :via => [:get, :post]
 match 'doc_pu/clean', :controller => 'doc_pu', :action => 'clean', :via => [:get, :post]
 match 'doc_pu/clean_remote', :controller => 'doc_pu', :action => 'clean_remote', :via => [:get, :post]
-match 'doc_pu/code', :controller => 'doc_pu', :action => 'code', :via => [:get, :post]
+match 'doc_pu/code', :controller => 'doc_pu', :action => 'code', :via => [:get]
 match 'doc_pu/delete', :controller => 'doc_pu', :action => 'delete', :via => [:get, :post]
 match 'doc_pu/template', :controller => 'doc_pu', :action => 'template', :via => [:get, :post]
 
