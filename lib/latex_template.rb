@@ -29,13 +29,13 @@ class LatexTemplate
 	def save(filename)
 		self.update_macros
 		# Write template file
-		f = File.new(filename, "w")
+		f = File.new(filename, 'w')
 		f.write(@file_content)
 		f.close
 	end
 	
 	def header()
-		return @file_content.scan(/^%%%(.*)/)
+		@file_content.scan(/^%%%(.*)/)
 	end
 
 end

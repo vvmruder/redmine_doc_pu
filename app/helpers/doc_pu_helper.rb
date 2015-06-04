@@ -10,34 +10,35 @@ module DocPuHelper
 				a.push(p.wiki_page.title)
 			end
 		end
-		return "(#{pages.count}): " + a.join(", ")
+		"(#{pages.count}): " + a.join(', ')
 	end
 
 	# Print version number string
 	def to_version(version)
 		return t(:text_current_version) if version == 0
-		return version.to_s
+		version.to_s
 	end
 
 	def build_icon(msg)
 		img = case msg
-			when "error" then image_tag("exclamation.png")
-			when "warning" then image_tag("warning.png")
-			when "bad_box" then image_tag("comment.png")
-			else ""
+			when 'error' then image_tag('exclamation.png')
+			when 'warning' then image_tag('warning.png')
+			when 'bad_box' then image_tag('comment.png')
+			else
+				''
 		end
-		return img
+		img
 	end
 	
 	def acronym_info_tag(str)
-		return "<acronym title=\"#{str}\">(?)</acronym>"
+		"<abbr title=\"#{str}\">(?)</abbr>".html_safe
 	end
 	
 	def flash_msg(err)
-		return "" if err.nil?
-		return "error" if err.error_lines.size != 0
-		return "warning" if err.warning_lines.size != 0
-		return "notice"
+		return '' if err.nil?
+		return 'error' if err.error_lines.size != 0
+		return 'warning' if err.warning_lines.size != 0
+		'notice'
 	end
 	
 end

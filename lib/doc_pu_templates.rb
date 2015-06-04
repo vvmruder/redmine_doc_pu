@@ -4,7 +4,7 @@ class DocPuTemplates < LatexTemplate
 	
 	attr_accessor :template_dir
 	
-	def initialize(template_dir = ".")
+	def initialize(template_dir = '.')
 		@template_dir = Dir.new(template_dir).path
 	end
 	
@@ -14,7 +14,7 @@ class DocPuTemplates < LatexTemplate
 	end
 	
 	def load(filename)
-		super(@template_dir + "/" + filename)
+		super(@template_dir + '/' + filename)
 	end
 	
 	def list()
@@ -23,10 +23,10 @@ class DocPuTemplates < LatexTemplate
 		Dir.chdir(@template_dir)
 		
 		# List directory
-		list = Dir.glob("*.tex")
+		list = Dir.glob('*.tex')
 		
 		# Restore working directory
 		Dir.chdir(old_work_dir)
-		return list
+		list
 	end
 end

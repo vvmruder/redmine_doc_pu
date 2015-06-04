@@ -7,7 +7,7 @@ module RedCloth::Formatters::LATEX_EX
 		opts[:text] = "\\textbf{#{opts[:text]}}" unless opts[:th].nil?
 		column = @table_row.size
 		if opts[:colspan]
-			vline = (draw_table_border_latex ? "|c|" : "c")
+			vline = (draw_table_border_latex ? '|c|' : 'c')
 			opts[:text] = "\\multicolumn{#{opts[:colspan]}}{#{vline}}{#{opts[:text]}}"
 		end
 		if opts[:rowspan]
@@ -15,19 +15,19 @@ module RedCloth::Formatters::LATEX_EX
 			opts[:text] = "\\multirow{#{opts[:rowspan]}}{*}{#{opts[:text]}}"
 		end
 		@table_row.push(opts[:text])
-		return ""
+    ''
 	end
 
 	def table_close(opts)
 		output  = "\\begin{table}[H]\n"
 		output << "  \\centering\n"
-		cols = "l" * @table[0].size if not draw_table_border_latex
-		cols = "|" + "l|" * @table[0].size if draw_table_border_latex
+		cols = 'l' * @table[0].size if not draw_table_border_latex
+		cols = '|' + 'l|' * @table[0].size if draw_table_border_latex
 		output << "  \\begin{tabular}{#{cols}}\n"
 		output << "   \\hline \n" if draw_table_border_latex
 		@table.each do |row|
-			hline = (draw_table_border_latex ? "\\hline" : "")
-			output << "    #{row.join(" & ")} \\\\ #{hline} \n"
+			hline = (draw_table_border_latex ? "\\hline" : '')
+			output << "    #{row.join(' & ')} \\\\ #{hline} \n"
 		end
 		output << "  \\end{tabular}\n"
 		output << "\\end{table}\n"
@@ -37,11 +37,11 @@ module RedCloth::Formatters::LATEX_EX
 	def image(opts)
 		opts[:alt] = opts[:src]
 		# Don't know how to use remote links, plus can we trust them?
-		return "" if opts[:src] =~ /^\w+\:\/\//
+		return '' if opts[:src] =~ /^\w+\:\/\//
 		# Resolve CSS styles if any have been set
 		styling = opts[:class].to_s.split(/\s+/).collect { |style| latex_image_styles[style] }.compact.join ','
 		# Build latex code
-		[ "\\begin{figure}[#{(opts[:align].nil? ? "H" : "htb")}]",
+		[ "\\begin{figure}[#{(opts[:align].nil? ? 'H' : 'htb')}]",
 		  "  \\centering",
 		  "  \\includegraphics[#{styling}]{#{opts[:src]}}",
 		 ("  \\caption{#{escape opts[:title]}}" if opts[:title]),
@@ -55,10 +55,10 @@ end
 module RedClothExtensionLatex
 
 	def latex_code(text)
-		text.gsub!(/<pre>(.*?)<\/pre>/im) do |m|
+		text.gsub!(/<pre>(.*?)<\/pre>/im) do |_|
 			code = $1
 			code.match(/<code\s+class="(.*)">(.*)<\/code>/im)
-			lang = "{}"
+			lang = '{}'
 			unless $1.nil?
 				code = $2
 				lang = "{#{$1}}"
@@ -68,7 +68,7 @@ module RedClothExtensionLatex
 	end
 
 	def latex_page_ref(text)
-		text.gsub!(/(\s|^)\[\[(.*?)(\|(.*?)|)\]\]/i) do |m|
+		text.gsub!(/(\s|^)\[\[(.*?)(\|(.*?)|)\]\]/i) do |_|
 			var = $2
 			label = $4
 			"<notextile> #{label} \\ref{page:#{var}}</notextile>"
@@ -76,7 +76,7 @@ module RedClothExtensionLatex
 	end
 
 	def latex_image_ref(text)
-		text.gsub!(/(\s|^)\{\{!(.*?)!\}\}/i) do |m|
+		text.gsub!(/(\s|^)\{\{!(.*?)!\}\}/i) do |_|
 			var = $2
 			"<notextile> \\ref{#{var}}</notextile>"
 		end
@@ -85,35 +85,35 @@ module RedClothExtensionLatex
 	def latex_footnote(text)
 		notes = {}
 		# Extract and delete footnote 
-		text.gsub!(/fn(\d+)\.\s+(.*)/i) do |m| 
-			notes[$1] = $2		
-			"" 
-		end
+		text.gsub!(/fn(\d+)\.\s+(.*)/i) do |_|
+			notes[$1] = $2
+      ''
+    end
 		# Add footnote
 		notes.each do |fn, txt|
-			text.gsub!(/(\w+)\[#{fn}\]/i) do |m|
+			text.gsub!(/(\w+)\[#{fn}\]/i) do |_|
 				"<notextile>#{$1}\\footnote{#{txt}}</notextile>" 
 			end
 		end
 	end
 
 	def latex_index_emphasis(text)
-		text.gsub!(/\s_(\w.*?)_/im) do |m|
+		text.gsub!(/\s_(\w.*?)_/im) do |_|
 			var = $1
 			" <notextile>\\index{#{var}}</notextile> _#{var}_"
 		end
 	end
 
 	def latex_index_importance(text)
-		text.gsub!(/\s\*(\w.*?)\*/im) do |m|
+		text.gsub!(/\s\*(\w.*?)\*/im) do |_|
 			var = $1
 			" <notextile>\\index{#{var}}</notextile> *#{var}*"
 		end
 	end
 
 	def latex_remove_macro(text)
-		text.gsub!(/(\s|^)\{\{(.*?)\}\}/i) do |m|
-		""
+		text.gsub!(/(\s|^)\{\{(.*?)\}\}/i) do |_|
+      ''
 		end
 	end
 end

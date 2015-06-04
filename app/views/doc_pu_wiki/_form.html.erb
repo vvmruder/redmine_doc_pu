@@ -1,6 +1,6 @@
 <div class="box">
-<% labelled_tabular_form_for :doc_pu_wiki, @doc_pu_wiki, :url => {:project_id => @project, :doc_pu_id => @doc_pu} do |f| %>
-	<%= error_messages_for :doc_pu_wiki %>
+<%= labelled_form_for :doc_pu_wiki, @doc_pu_wiki, :url => {:project_id => @project, :doc_pu_id => @doc_pu} do |f| %>
+	<%= error_messages_for @doc_pu_wiki %>
 	
 	<div class="splitcontentleft">
 		<p><%= f.select :wiki_page_id, options_from_collection_for_select(@project.wiki.pages, :id, :title, @doc_pu_wiki.wiki_page_id), :required => true %></p>
@@ -20,6 +20,7 @@
 		<p></p>
 	</div>
 	<div class="splitcontentright">
+        <p><%= acronym_info_tag 'Hallo' %></p>
 		<p><%= f.check_box :latex_add_chapter, :disabled => @doc_pu_wiki.use_doc_flags %> <%= acronym_info_tag t(:info_latex_add_chapter) %></p>
 		<p><%= f.check_box :latex_remove_macro, :disabled => @doc_pu_wiki.use_doc_flags %> <%= acronym_info_tag t(:info_latex_remove_macro) %></p>
 		<p><%= f.check_box :latex_code, :disabled => @doc_pu_wiki.use_doc_flags %> <%= acronym_info_tag t(:info_latex_code) %></p>

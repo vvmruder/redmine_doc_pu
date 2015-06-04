@@ -1,6 +1,6 @@
 <div class="box">
-<% labelled_tabular_form_for :doc, @doc, :url => {:id => @doc, :project_id => @project} do |f| %>
-	<%= error_messages_for :doc %>
+<%= labelled_form_for :doc, @doc, :url => {:id => @doc, :project_id => @project} do |f| %>
+	<%= error_messages_for @doc %>
 	
 	<div class="splitcontentleft">
 		<p><%= f.text_field :name, :size => 30, :required => true %></p>
@@ -25,7 +25,8 @@
 		<p><%= f.check_box :latex_index_importance %> <%= acronym_info_tag t(:info_latex_index_importance) %></p>
 		<p><%= f.check_box :latex_table_border %> <%= acronym_info_tag t(:info_latex_table_border) %></p>
 		<p><%= f.check_box :latex_image_ref %> <%= acronym_info_tag t(:info_latex_image_ref) %></p>
-
+	  	<p></p>
+		<p></p>
 	</div>
 
 <div align=left><%= submit_tag l(:button_save) %></div>

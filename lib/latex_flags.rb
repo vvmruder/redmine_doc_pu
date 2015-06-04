@@ -15,7 +15,7 @@ module ModuleLatexFlags
 	
 	
 	# Create flag attributes
-	ModuleLatexFlags::FLAGS.each do |m, v|
+	ModuleLatexFlags::FLAGS.each do |m, _|
 		attr_accessor m
 	end
 
@@ -23,10 +23,10 @@ module ModuleLatexFlags
 	# Serialize flags
 	def flags_to_str()
 		flags = Hash.new
-		ModuleLatexFlags::FLAGS.each do |m, v|
+		ModuleLatexFlags::FLAGS.each do |m, _|
 			flags[m] = (self.send(m).nil? ? false : self.send(m))
 		end
-		return flags.to_a.join(",")
+		flags.to_a.join(',')
 	end
 
 	
@@ -34,15 +34,15 @@ module ModuleLatexFlags
 	def flags_from_str(str)
 		# Load flag values
 		unless str.nil?
-			flags = Hash[*str.split(",")]
-			ModuleLatexFlags::FLAGS.each do |m, v|
-				self.send(m.to_s + "=", flags[m.to_s] == "true")
+			flags = Hash[*str.split(',')]
+			ModuleLatexFlags::FLAGS.each do |m, _|
+				self.send(m.to_s + '=', flags[m.to_s] == 'true')
 			end
 		end
 		
 		# Set default flag values
 		ModuleLatexFlags::FLAGS.each do |m, v|
-			self.send(m.to_s + "=", v) if self.send(m).nil?
+			self.send(m.to_s + '=', v) if self.send(m).nil?
 		end
 	end
 	

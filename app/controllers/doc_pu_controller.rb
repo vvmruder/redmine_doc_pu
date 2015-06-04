@@ -2,7 +2,7 @@ require 'doc_pu_templates'
 
 class DocPuController < ApplicationController
 	unloadable
-	layout "base"
+	layout 'base'
 	menu_item :doc_pu_menu
 	#before_filter :find_project
 	before_filter :find_project, :authorize
@@ -16,7 +16,7 @@ class DocPuController < ApplicationController
 
 	# Create new document
 	def new
-		@templates_list = DocPuTemplates.new(Rails.root.join(Setting.plugin_redmine_doc_pu["template_dir"])).list
+		@templates_list = DocPuTemplates.new(Rails.root.join(Setting.plugin_redmine_doc_pu['template_dir'])).list
 		@doc = DocPuDocument.new
 		@doc.project = @project
 		@doc.user = User.current
@@ -35,14 +35,17 @@ class DocPuController < ApplicationController
 	# Edit document
 	def edit
 		@doc = DocPuDocument.find(params[:id])		
-		if request.post?
+		if request.put?
 			# Update document
 			@doc.attributes = checkbox_to_boolean(params[:doc])
 			flash[:notice] = t(:flash_document_updated) if @doc.save
-		end 
-		
+    end
+
+    if request.get?
+
+    end
 		# Create template list and info
-		@templates = DocPuTemplates.new(Rails.root.join(Setting.plugin_redmine_doc_pu["template_dir"]))
+		@templates = DocPuTemplates.new(Rails.root.join(Setting.plugin_redmine_doc_pu['template_dir']))
 		@templates_list = @templates.list
 		@template_info = @templates.header(@doc.template).join("\n")
 	end
@@ -51,7 +54,7 @@ class DocPuController < ApplicationController
 	def open
 		@doc = DocPuDocument.find(params[:id])
 		begin
-			send_file @doc.filepath, :type => "application/pdf"
+			send_file @doc.filepath, :type => 'application/pdf'
 		rescue
 			flash[:warning] = t(:flash_no_document_found)
 			redirect_to :action => :build, :project_id => @project, :id => @doc
@@ -61,7 +64,7 @@ class DocPuController < ApplicationController
 	
 	def template
 		@doc = DocPuDocument.find(params[:id])
-		@templates = DocPuTemplates.new(Rails.root.join(Setting.plugin_redmine_doc_pu["template_dir"]))
+		@templates = DocPuTemplates.new(Rails.root.join(Setting.plugin_redmine_doc_pu['template_dir']))
 		@templates.load(@doc.template)
 		@code = @templates.file_content
 	end
@@ -84,13 +87,13 @@ class DocPuController < ApplicationController
 		@doc.save
 	
 		# Create template
-		@templates = DocPuTemplates.new(Rails.root.join(Setting.plugin_redmine_doc_pu["template_dir"]))
+		@templates = DocPuTemplates.new(Rails.root.join(Setting.plugin_redmine_doc_pu['template_dir']))
 		@templates.load(@doc.template)
 		
 		# Setup build
-		@doc.latex_bin = Setting.plugin_redmine_doc_pu["latex_bin"]
-		@doc.makeindex_bin = Setting.plugin_redmine_doc_pu["makeindex_bin"]
-		@doc.work_dir = Rails.root.join("files")
+		@doc.latex_bin = Setting.plugin_redmine_doc_pu['latex_bin']
+		@doc.makeindex_bin = Setting.plugin_redmine_doc_pu['makeindex_bin']
+		@doc.work_dir = Rails.root.join('files')
 		@doc.latex_template = @templates
 		
 		# Build document
@@ -107,22 +110,24 @@ class DocPuController < ApplicationController
 		@doc.build_log.each do |log_line|
 			@log.push({:line => log_line, :msg => nil})
 		end
-		@error.error_lines.each{|num| @log[num - 1][:msg] = "error" }
-		@error.warning_lines.each{|num| @log[num - 1][:msg] = "warning"}
-		@error.bad_box_lines.each{|num| @log[num - 1][:msg] = "bad_box"}
+		@error.error_lines.each{|num| @log[num - 1][:msg] = 'error' }
+		@error.warning_lines.each{|num| @log[num - 1][:msg] = 'warning'
+		}
+		@error.bad_box_lines.each{|num| @log[num - 1][:msg] = 'bad_box'
+		}
 		
-		render :partial => "log"
+		render :partial => 'log'
 	end
 	
 	def clean_remote
 		@doc = DocPuDocument.new
-		@doc.work_dir = Rails.root.join("files")
+		@doc.work_dir = Rails.root.join('files')
 		@error = @doc.clean
 		@log = Array.new
 		@doc.build_log.each do |log_line|
 			@log.push({:line => log_line, :msg => nil})
 		end
-		render :partial => "log"
+		render :partial => 'log'
 	end
 
 	# Delete document
@@ -139,10 +144,16 @@ class DocPuController < ApplicationController
 	end
 
 	# Convert checkbox value to boolean
-		def checkbox_to_boolean(param)
-		ModuleLatexFlags::FLAGS.each do |m, v|
-			param[m.to_s] = (param[m.to_s] == "1")
-		end
-		return param
+  def checkbox_to_boolean(param)
+    temp_array = Array.new
+    ModuleLatexFlags::FLAGS.each do |m, _|
+			param[m.to_s] = (param[m.to_s] == '1')
+    end
+    ModuleLatexFlags::FLAGS.each do |m, _|
+      temp_array.push(m.to_s)
+      temp_array.push(param[m.to_s])
+    end
+    param['doc_flags'] = temp_array.join(',')
+		param
 	end
 end

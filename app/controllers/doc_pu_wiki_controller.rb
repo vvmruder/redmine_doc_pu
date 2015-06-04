@@ -1,6 +1,6 @@
 class DocPuWikiController < ApplicationController
 	unloadable
-	layout "base"
+	layout 'base'
 	menu_item :doc_pu_menu
 	before_filter :find_project, :find_doc_pu_document
 
@@ -50,10 +50,10 @@ class DocPuWikiController < ApplicationController
 		move_to = params[:doc_pu_wiki][:move_to]
 		ordered_wikis.delete(wiki)
 		case move_to
-			when "highest" then ordered_wikis.insert(0, wiki)
-			when "lowest" then ordered_wikis.insert(-1, wiki)
-			when "higher" then ordered_wikis.insert(wiki.wiki_page_order - 1, wiki)
-			when "lower" then ordered_wikis.insert(wiki.wiki_page_order + 1, wiki)
+			when 'highest' then ordered_wikis.insert(0, wiki)
+			when 'lowest' then ordered_wikis.insert(-1, wiki)
+			when 'higher' then ordered_wikis.insert(wiki.wiki_page_order - 1, wiki)
+			when 'lower' then ordered_wikis.insert(wiki.wiki_page_order + 1, wiki)
 		end
 		reorder_pages(ordered_wikis)
 		redirect_to :controller => :doc_pu, :action => :edit, :project_id => @project, :id => @doc_pu
@@ -90,14 +90,14 @@ class DocPuWikiController < ApplicationController
 	def get_new_page_order
 		page = @doc_pu.doc_pu_wiki_pages.all.last.wiki_page_order
 		page = 0 if page.nil?
-		return page + 1
+		page + 1
 	end
 	
 	# Convert checkbox value to boolean
 	def checkbox_to_boolean(param)
-		ModuleLatexFlags::FLAGS.each do |m, v|
-			param[m.to_s] = (param[m.to_s] == "1")
+		ModuleLatexFlags::FLAGS.each do |m, _|
+			param[m.to_s] = (param[m.to_s] == '1')
 		end
-		return param
+		param
 	end
 end

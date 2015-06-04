@@ -61,7 +61,7 @@ module ModuleLatexBuild
 	attr_accessor :build_log
 	
 	def version()
-		f = IO.popen(self.latex_bin + " --version")
+		f = IO.popen(self.latex_bin + ' --version')
 		f.readlines[0]
 	end
 		
@@ -72,7 +72,7 @@ module ModuleLatexBuild
 		
 		begin
 			# Run Latex application
-			f = IO.popen(self.latex_bin + " -interaction=nonstopmode " + filename)
+			f = IO.popen(self.latex_bin + ' -interaction=nonstopmode ' + filename)
 			self.build_log = f.readlines
 			f.close
 			
@@ -82,7 +82,7 @@ module ModuleLatexBuild
 			# Restore working directory
 			Dir.chdir(old_work_dir)
 		end
-		return par
+		par
 	end
 
 	def clean(filename)
@@ -93,12 +93,12 @@ module ModuleLatexBuild
 		begin
 			# Delete files
 			name = filename.split(/(\w*)./)[1]
-			File.delete(name + ".aux") if File.exist?(name + ".aux")
-			File.delete(name + ".idx") if File.exist?(name + ".idx")
-			File.delete(name + ".lof") if File.exist?(name + ".lof")
-			File.delete(name + ".log") if File.exist?(name + ".log")
-			File.delete(name + ".out") if File.exist?(name + ".out")
-			File.delete(name + ".toc") if File.exist?(name + ".toc")
+			File.delete(name + '.aux') if File.exist?(name + '.aux')
+			File.delete(name + '.idx') if File.exist?(name + '.idx')
+			File.delete(name + '.lof') if File.exist?(name + '.lof')
+			File.delete(name + '.log') if File.exist?(name + '.log')
+			File.delete(name + '.out') if File.exist?(name + '.out')
+			File.delete(name + '.toc') if File.exist?(name + '.toc')
 
 			# Add build log message
 			self.build_log = [
@@ -112,14 +112,14 @@ module ModuleLatexBuild
 			# Restore working directory
 			Dir.chdir(old_work_dir)
 		end
-		return LatexOutputParser.new()
+		LatexOutputParser.new()
 	end
 end
 
 class LatexBuild
 	include ModuleLatexBuild
 		
-	def initialize(latex_bin = "latex", work_dir = ".")
+	def initialize(latex_bin = 'latex', work_dir = '.')
 		self.latex_bin = latex_bin
 		self.work_dir = work_dir
 		self.build_log = []

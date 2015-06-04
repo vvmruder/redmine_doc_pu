@@ -17,7 +17,7 @@ module ModuleLatexWikiPage
 			# Get latest page
 			page_txt = String.new(self.wiki_page.content.text)
 		else
-			ver = self.wiki_page.content.versions.find(:first, :conditions => [ "version = ?", self.wiki_page_version])
+			ver = self.wiki_page.content.versions.find(:first, :conditions => [ 'version = ?', self.wiki_page_version])
 			raise ArgumentError, "Can't find Page version!" if ver.nil?
 			page_txt = String.new(ver.text)
 		end
@@ -28,11 +28,11 @@ module ModuleLatexWikiPage
 		end
 		
 		# Check wiki referenzes for redirects
-		page_txt.gsub!(/(\s|^)\[\[(.*?)(\|(.*?)|)\]\]/i) do |m|
+		page_txt.gsub!(/(\s|^)\[\[(.*?)(\|(.*?)|)\]\]/i) do |_|
 			ref = $2
 			label = $4
 			ref = Wiki.titleize(ref)
-			redir = WikiRedirect.all(:conditions => ["title = ?", ref])[0]
+			redir = WikiRedirect.all(:conditions => ['title = ?', ref])[0]
 			ref = redir.redirects_to unless redir.nil?
 			" [[#{ref}|#{label}]]"
 		end
@@ -57,12 +57,12 @@ module ModuleLatexWikiPage
 			page_txt = "\n\\chapter{#{self.chapter_name}} \\label{page:#{self.wiki_page.title}}\n" + page_txt
 		else
 			# Add label to first section, if section exists
-			page_txt.sub!(/\\section\{(.+)\}/i) do |m| 
-				"\\section{#{$1}}\\label{page:#{self.wiki_page.title.gsub(" ", "_")}}"
+			page_txt.sub!(/\\section\{(.+)\}/i) do |_|
+				"\\section{#{$1}}\\label{page:#{self.wiki_page.title.gsub(' ', '_')}}"
 			end
 		end
-		
-		return page_txt
+
+		page_txt
 	end
 end
 
@@ -73,14 +73,14 @@ class LatexWikiPage
 	attr_accessor :wiki_page_version
 	attr_accessor :chapter_name
 	
-	def initialize(wiki_page, wiki_page_version = 0, chapter_name = "Chapter")
+	def initialize(wiki_page, wiki_page_version = 0, chapter_name = 'Chapter')
 		self.wiki_page = wiki_page
 		self.wiki_page_version = wiki_page_version
 		self.chapter_name = chapter_name
 		
 		# Set default flag values
 		ModuleLatexWikiPage::FLAGS.each do |m, v|
-			self.send(m.to_s + "=", v)
+			self.send(m.to_s + '=', v)
 		end
 	end
 end
