@@ -58,7 +58,7 @@ de:
   link_edit_document: "Dokument bearbeiten"
   link_code: "LaTeX Code"
   heading_build_document: "Dokument generieren"
-  text_press_build_button: "Drücken Sie die <b>Generieren</b> Schaltfläche um das Dokument zu generieren."
+  text_press_build_button: "Drücken Sie die 'Generieren' Schaltfläche um das Dokument zu generieren."
   button_build: "Generieren"
   button_clean: "Bereinigen"
   info_doc_title: "Dokument Name wird verwendet wenn Feld leer ist."
