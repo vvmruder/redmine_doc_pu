@@ -1,5 +1,5 @@
 <div class="contextual">
-	<%= link_to t(:link_edit_document), {:controller => :doc_pu, :action => :edit, :project_id => @project, :id => @doc}, :class => 'icon icon-edit' %>
+	<%= link_to t(:link_back), {:controller => :doc_pu, :action => :edit, :project_id => @project, :id => @doc}, :class => 'icon icon-edit' %>
 </div>
 
 <h2><%=t :heading_template_code %></h2>
@@ -7,7 +7,7 @@
 	<div style="height:400px" class="box autoscroll">
 		<table>
 			<tbody>
-				<% @code.each do |l| %> 
+				<% @code.each_line  do |l| %>
 					<tr>
 						<td><%= l %></td>
 					</tr>
