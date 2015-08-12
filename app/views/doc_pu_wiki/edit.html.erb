@@ -1,2 +1,5 @@
 <h2><%=t :heading_edit_wiki_page %></h2>
 <%= render 'form' %>
+<% content_for :header_tags do %>
+    <%= stylesheet_link_tag 'doc_pu_edit_wiki', :plugin => 'redmine_doc_pu' %>
+<% end %>

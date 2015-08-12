@@ -3,6 +3,8 @@ require 'latex_wiki_page'
 
 class DocPuWikiPage < ActiveRecord::Base
 	unloadable
+	after_initialize :get_flags_from_str
+	before_save :set_flags_to_str
 
 	belongs_to :wiki_page
 	belongs_to :doc_pu_document
@@ -22,12 +24,12 @@ class DocPuWikiPage < ActiveRecord::Base
 		super
 	end
 	
-	def after_initialize()
+	def get_flags_from_str
 		self.flags_from_str(self.flags)
 		true
 	end
 
-	def before_save()
+	def set_flags_to_str
 		self.flags = self.flags_to_str()
 		true
 	end
