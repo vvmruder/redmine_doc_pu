@@ -3,6 +3,10 @@ require 'latex_doc'
 
 class DocPuDocument < ActiveRecord::Base
 	unloadable
+  after_initialize :get_flags_from_str
+  before_save :set_flags_to_str
+  after_destroy :delete_file
+
 
 	belongs_to :user
 	belongs_to :project
@@ -28,28 +32,28 @@ class DocPuDocument < ActiveRecord::Base
 		self.doc_pu_wiki_pages.all
 	end
 
-	def after_initialize()
-		self.flags_from_str(self.doc_flags)
+	def get_flags_from_str
+    self.flags_from_str(self.doc_flags)
 		true
 	end
 
-	def before_save()
-		self.doc_flags = self.flags_to_str()
+	def set_flags_to_str
+    self.doc_flags = self.flags_to_str
 		true
 	end
 
-	def after_destroy()
-		# Delete document file, if exist
+	def delete_file
+    # Delete document file, if exist
 		File.delete(self.filepath) if File.exist?(self.filepath)
 		true
 	end
 
-	def filepath()
-		Rails.root.join('files', self.filename)
+	def filepath
+    Rails.root.join('files', self.filename)
 	end
 	
-	def filename()
-		"doc_pu_#{self.id}.pdf"
+	def filename
+    "doc_pu_#{self.id}.pdf"
 	end
 
 end

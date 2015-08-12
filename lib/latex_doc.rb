@@ -35,7 +35,7 @@ module ModuleLatexDoc
 		version
 	end
 	
-	def makeindex()
+	def makeindex
 		old_work_dir = Dir.pwd
 		# Change to working directory
 		Dir.chdir(self.work_dir)
@@ -59,7 +59,7 @@ module ModuleLatexDoc
 		self.wiki_pages.push(page)
 	end
 	
-	def to_latex()
+	def to_latex
 		doc_txt = ''
 		self.wiki_pages.each do |page|
 			doc_txt += page.to_latex
@@ -87,7 +87,7 @@ module ModuleLatexDoc
 		ret
 	end
 	
-	def clean()
+	def clean
 		# Delete latex files
 		File.delete(self.work_dir + 'document.tex') if File.exist?(self.work_dir + 'document.tex')
 		File.delete(self.work_dir + 'template.tex') if File.exist?(self.work_dir + 'template.tex')
