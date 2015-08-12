@@ -46,6 +46,7 @@ bg:
   link_build: "Компилиране"
   link_edit: "Редактиране"
   link_delete: "Изтриване"
+  link_back: "обратно"
   text_are_you_sure: "Сигурен ли сте?"
   link_build_document: "Компилиране на документ"
   heading_edit_document: "Редактиране на документ"

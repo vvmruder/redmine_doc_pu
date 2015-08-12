@@ -46,6 +46,7 @@ de:
   link_build: "Generieren"
   link_edit: "Bearbeiten"
   link_delete: "Löschen"
+  link_back: "Zurück"
   text_are_you_sure: "Sind Sie sicher?"
   link_build_document: "Dokument generieren"
   heading_edit_document: "Dokument bearbeiten"

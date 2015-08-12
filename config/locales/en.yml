@@ -46,6 +46,7 @@ en:
   link_build: "Build"
   link_edit: "Edit"
   link_delete: "Delete"
+  link_back: "Back"
   text_are_you_sure: "Are you sure?"
   link_build_document: "Build document"
   heading_edit_document: "Edit document"
