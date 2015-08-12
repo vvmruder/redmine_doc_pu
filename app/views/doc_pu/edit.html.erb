@@ -27,3 +27,6 @@
 		<%= textilizable @template_info %>
 	</div>
 </div>
+<% content_for :header_tags do %>
+    <%= stylesheet_link_tag 'doc_pu_edit_document', :plugin => 'redmine_doc_pu' %>
+<% end %>
