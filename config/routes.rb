@@ -15,3 +15,7 @@ match 'doc_pu_wiki/new', :controller => 'doc_pu_wiki', :action => 'new', :via =>
 match 'doc_pu_wiki/edit', :controller => 'doc_pu_wiki', :action => 'edit', :via => [:get, :post]
 match 'doc_pu_wiki/delete', :controller => 'doc_pu_wiki', :action => 'delete', :via => [:get, :post]
 match 'doc_pu_wiki/edit_order', :controller => 'doc_pu_wiki', :action => 'edit_order', :via => [:get, :post]
+
+match 'doc_pu_settings/test_latex', :controller => 'doc_pu_settings', :action => 'test_latex', :via => [:post]
+match 'doc_pu_settings/test_makeindex', :controller => 'doc_pu_settings', :action => 'test_makeindex', :via => [:post]
+match 'doc_pu_settings/test_template', :controller => 'doc_pu_settings', :action => 'test_template', :via => [:post]
