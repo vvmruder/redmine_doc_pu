@@ -28,7 +28,7 @@ module ModuleLatexDoc
 			File.delete('makeindex.ilg') if File.exist?('makeindex.ilg')
 			File.delete('makeindex.ind') if File.exist?('makeindex.ind')
 			File.delete('makeindex.txt') if File.exist?('makeindex.txt')
-			
+
 			# Restore working directory
 			Dir.chdir(old_work_dir)
 		end
