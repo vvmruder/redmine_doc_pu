@@ -8,7 +8,9 @@ class DocPuSettingsController < ApplicationController
 		begin
 			version = LatexDoc.new(params[:file]).version
 			flash = 'notice'
-		rescue Errno::ENOENT => msg 
+    rescue Errno::ENOENT => msg
+			version = msg
+		rescue Errno::EACCES => msg
 			version = msg
 		end
 		render :text => "<div id=\"test-result\" class=\"flash #{flash}\">#{version}</div>"
@@ -21,6 +23,8 @@ class DocPuSettingsController < ApplicationController
 			flash = 'notice'
 		rescue Errno::ENOENT => msg 
 			version = msg
+    rescue Errno::EACCES => msg
+      version = msg
 		end
 		render :text => "<div id=\"test-result\" class=\"flash #{flash}\">#{version}</div>"
 	end
@@ -38,6 +42,8 @@ class DocPuSettingsController < ApplicationController
 			end
 		rescue Errno::ENOENT => msg 
 			dirs = msg
+    rescue Errno::EACCES => msg
+      dirs = msg
 		end
 		render :text => "<div id=\"test-result\" class=\"flash #{flash}\">#{dirs}</div>"
 	end

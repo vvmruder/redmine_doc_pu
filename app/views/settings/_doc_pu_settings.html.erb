@@ -1,29 +1,111 @@
-<p><label><%=t :field_latex_bin %></label><%= text_field_tag 'settings[latex_bin]', @settings['latex_bin'], :size => 50 %>
-<%= button_to t(:button_test),
-	:url => { :controller => :doc_pu_settings, :action => :test_latex},
-	:with => "'file=' + $('settings_latex_bin').value",
-	:update => 'latex-bin-result'
+<%= javascript_tag do %>
+    $(document).ready(function(){
+        $('#doc_pu_settings_latex_bin').bind("ajax:complete", function(evt, xhr, settings){
+            console.log(xhr.responseText);
+            $("#result").html(xhr.responseText);
+        }).on("click", function(event) {
+            event.preventDefault(); // don't trigger default
 
-%>
+            // get the value inside the text field
+            var value = $("#latex_bin").val();
+            var url = $(this).attr("href").split("?");
+            if (url.length == 1){
+                $(this).attr("href", $(this).attr("href") + "?file=" + value);
+            }else {
+                url.pop();
+                url.push('file=' + value);
+                $(this).attr("href", url.join("?"));
+            }
+        })
+        $('#doc_pu_settings_makeindex_bin').bind("ajax:complete", function(evt, xhr, settings){
+            console.log(xhr.responseText);
+            $("#result").html(xhr.responseText);
+        }).on("click", function(event) {
+            event.preventDefault(); // don't trigger default
+
+            // get the value inside the text field
+            var value = $("#makeindex_bin").val();
+            var url = $(this).attr("href").split("?");
+            if (url.length == 1){
+                $(this).attr("href", $(this).attr("href") + "?file=" + value);
+            }else {
+                url.pop();
+                url.push('file=' + value);
+                $(this).attr("href", url.join("?"));
+            }
+        })
+        $('#doc_pu_settings_test_template').bind("ajax:complete", function(evt, xhr, settings){
+            console.log(xhr.responseText);
+            $("#result").html(xhr.responseText);
+        }).on("click", function(event) {
+            event.preventDefault(); // don't trigger default
+
+            // get the value inside the text field
+            var value = $("#template_dir").val();
+            var url = $(this).attr("href").split("?");
+            if (url.length == 1){
+                $(this).attr("href", $(this).attr("href") + "?file=" + value);
+            }else {
+                url.pop();
+                url.push('file=' + value);
+                $(this).attr("href", url.join("?"));
+            }
+        })
+    });
+<% end %>
+<p>
+  <label>
+    <%=t :field_latex_bin %>
+  </label>
+  <%= text_field_tag 'settings[latex_bin]', value=@settings['latex_bin'], :size => 50, :id => "latex_bin" %>
+  <%= link_to(
+              t(:button_test),
+              {
+                      :controller => "doc_pu_settings",
+                      :action => "test_latex"
+              },
+              :id => "doc_pu_settings_latex_bin",
+              :remote => true,
+              :method => :post
+      )
+  %>
 </p>
-<div id="latex-bin-result"></div>
 
-<p><label><%=t :field_makindex_bin %></label><%= text_field_tag 'settings[makeindex_bin]', @settings['makeindex_bin'], :size => 50 %>
-<%= button_to t(:button_test),
-	:url => { :controller => :doc_pu_settings, :action => :test_makeindex},
-	:with => "'file=' + $('settings_makeindex_bin').value",
-	:update => 'makeindex-bin-result'
-
-%>
+<p>
+  <label>
+    <%=t :field_makindex_bin %>
+  </label>
+  <%= text_field_tag 'settings[makeindex_bin]', value=@settings['makeindex_bin'], :size => 50, :id => "makeindex_bin" %>
+  <%= link_to(
+              t(:button_test),
+              {
+                      :controller => "doc_pu_settings",
+                      :action => "test_makeindex"
+              },
+              :id => "doc_pu_settings_makeindex_bin",
+              :remote => true,
+              :method => :post
+      )
+  %>
 </p>
-<div id="makeindex-bin-result"></div>
 
-<p><label><%=t :field_template_dir %></label><%= text_field_tag 'settings[template_dir]', @settings['template_dir'], :size => 50 %>
-<%= button_to t(:button_test),
-	:url => { :controller => :doc_pu_settings, :action => :test_template},
-	:with => "'file=' + $('settings_template_dir').value",
-	:update => 'template-dir-result'
-
-%>
+<p>
+  <label>
+    <%=t :field_template_dir %>
+  </label>
+  <%= text_field_tag 'settings[template_dir]', value=@settings['template_dir'], :size => 50, :id => "template_dir" %>
+  <%= link_to(
+              t(:button_test),
+              {
+                      :controller => "doc_pu_settings",
+                      :action => "test_template"
+              },
+              :id => "doc_pu_settings_test_template",
+              :update => 'template-dir-result',
+              :remote => true,
+              :method => :post
+      )
+  %>
 </p>
-<div id="template-dir-result"></div>
+
+<div id="result"></div>
