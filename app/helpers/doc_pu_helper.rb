@@ -10,7 +10,8 @@ module DocPuHelper
 				a.push(p.wiki_page.title)
 			end
 		end
-		"(#{pages.count}): " + a.join(', ')
+		result =  "(#{pages.count}): " + a.join(', ')
+		result.html_safe
 	end
 
 	# Print version number string
