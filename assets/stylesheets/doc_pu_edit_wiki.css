@@ -1,0 +1,7 @@
+.doc_pu_edit_table {
+    width: 80%;
+    border-collapse:collapse;
+}
+.doc_pu_edit_table_column {
+    width: 50%;
+}
