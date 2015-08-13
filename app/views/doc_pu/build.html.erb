@@ -12,15 +12,20 @@
 	<div class="flash warning"><%=t :text_press_build_button %></div>
 </div>
 <p>
-<%= button_to t(:button_build),
+<%= link_to t(:button_build),
 	{:controller => :doc_pu, :action => :build_remote, :project_id => @project, :id => @doc},
-	:update => 'log-result',
-    :remote => true
+    :remote => true,
+    :id => "button_build_doc_remote",
+    :class => "button_link"
 %>
-
-<%= button_to t(:button_clean),
+<%= link_to t(:button_clean),
 	{:controller => :doc_pu, :action => :clean_remote, :project_id => @project, :id => @doc},
-	:update => 'log-result',
-    :remote => true
+    :remote => true,
+    :id => "button_clean_doc_remote",
+    :class => "button_link"
 %>
 <%= acronym_info_tag t(:info_build_latex_multiple_times) %>
+</p>
+<% content_for :header_tags do %>
+  <%= javascript_include_tag 'build', :plugin => 'redmine_doc_pu' %>
+<% end %>
