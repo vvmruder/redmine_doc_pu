@@ -62,8 +62,9 @@ module RedClothExtensionLatex
 			unless $1.nil?
 				code = $2
 				lang = "{#{$1}}"
-			end
-			"<notextile>\\begin{lstlisting}[language=#{lang}]#{code}\\end{lstlisting}\n</notextile>"
+      end
+      latex_code_text = "<notextile>\\begin{minted}[mathescape,linenos,numbersep=5pt,frame=lines,framesep=2mm,fontsize=\footnotesize,fontfamily=courier]{#{lang}}#{code}\\end{minted}\n</notextile>"
+      latex_code_text
 		end
 	end
 
@@ -118,6 +119,8 @@ module RedClothExtensionLatex
 	end
 end
 
+# Include rules
+RedCloth.include(RedClothExtensionLatex)
 
 class TextileDocLatex < RedCloth::TextileDoc
 	attr_accessor :draw_table_border_latex
@@ -128,5 +131,4 @@ class TextileDocLatex < RedCloth::TextileDoc
 	end
 end
 
-# Include rules
-RedCloth.include(RedClothExtensionLatex)
+
