@@ -8,7 +8,7 @@ module ModuleLatexWikiPage
 		file_sub = {}
 		self.wiki_page.attachments.each do |att|
 			unless att.content_type.match(/^image/i).nil?
-				file_sub[att.filename] = att.disk_filename
+				file_sub[att.filename] = att.diskfile
 			end
 		end
 		
