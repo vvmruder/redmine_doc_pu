@@ -73,7 +73,7 @@ module ModuleLatexBuild
 		begin
 			# Run Latex application
 			# use shell escape to use minted for syntax highlighting
-			f = IO.popen(self.latex_bin + ' -interaction=nonstopmode -shell-escape' + filename)
+			f = IO.popen(self.latex_bin + ' -interaction=nonstopmode -shell-escape ' + filename)
 			self.build_log = f.readlines
 			f.close
 			
@@ -87,7 +87,6 @@ module ModuleLatexBuild
 	end
 
 	def clean(filename)
-		puts self.work_dir
 		old_work_dir = Dir.pwd
 		# Change to working directory
 		Dir.chdir(self.work_dir)
