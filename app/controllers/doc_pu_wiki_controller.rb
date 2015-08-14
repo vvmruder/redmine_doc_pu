@@ -31,8 +31,8 @@ class DocPuWikiController < ApplicationController
 	
 	# Edit wiki page
 	def edit
-		@doc_pu_wiki = DocPuWikiPage.find(params[:doc_pu_id])
-		if request.post?
+		@doc_pu_wiki = DocPuWikiPage.find(params[:id])
+		if request.put?
 			# Update object
 			@doc_pu_wiki.attributes = checkbox_to_boolean(params[:doc_pu_wiki])
 			if @doc_pu_wiki.save
@@ -97,7 +97,8 @@ class DocPuWikiController < ApplicationController
 	def checkbox_to_boolean(param)
 		ModuleLatexFlags::FLAGS.each do |m, _|
 			param[m.to_s] = (param[m.to_s] == '1')
-		end
+    end
+    puts param
 		param
 	end
 end
