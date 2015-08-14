@@ -63,7 +63,9 @@ module RedClothExtensionLatex
 				code = $2
 				lang = "{#{$1}}"
       end
-      latex_code_text = "<notextile>\\begin{minted}[mathescape,linenos,numbersep=5pt,frame=lines,framesep=2mm,fontsize=\footnotesize,fontfamily=courier]{#{lang}}#{code}\\end{minted}\n</notextile>"
+      minted_settings = %W(mathescape linenos numbersep=5pt frame=lines framesep=2mm tabsize=4 fontsize=\\footnotesize)
+                            .join(",")
+      latex_code_text = "<notextile>\\begin{minted}[#{minted_settings}]#{lang}#{code}\n\\end{minted}\n</notextile>"
       latex_code_text
 		end
 	end
@@ -93,7 +95,7 @@ module RedClothExtensionLatex
 		# Add footnote
 		notes.each do |fn, txt|
 			text.gsub!(/(\w+)\[#{fn}\]/i) do |_|
-				"<notextile>#{$1}\\footnote{#{txt}}</notextile>" 
+				"<notextile>#{$1}\\footnote{#{txt}}</notextile>"
 			end
 		end
 	end
