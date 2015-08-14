@@ -31,7 +31,7 @@ class DocPuWikiController < ApplicationController
 	
 	# Edit wiki page
 	def edit
-		@doc_pu_wiki = DocPuWikiPage.find(params[:id])
+		@doc_pu_wiki = DocPuWikiPage.find(params[:doc_pu_id])
 		if request.post?
 			# Update object
 			@doc_pu_wiki.attributes = checkbox_to_boolean(params[:doc_pu_wiki])
