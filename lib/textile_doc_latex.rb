@@ -4,6 +4,17 @@ module RedCloth::Formatters::LATEX_EX
 	include RedCloth::Formatters::LATEX
 	
 	def td(opts)
+    if opts[:text]
+      if opts[:text].include? "\n"
+        opts[:text] = opts[:text].gsub! "\n", "\\par"
+      end
+      if opts[:text].include? '&'
+        opts[:text] = opts[:text].gsub! '&', '\\\\\\&'
+      end
+      if opts[:text].include? '%'
+        opts[:text] = opts[:text].gsub! '%', '\\\\%'
+      end
+    end
 		opts[:text] = "\\textbf{#{opts[:text]}}" unless opts[:th].nil?
 		column = @table_row.size
 		if opts[:colspan]
@@ -21,15 +32,16 @@ module RedCloth::Formatters::LATEX_EX
 	def table_close(opts)
 		output  = "\\begin{table}[H]\n"
 		output << "  \\centering\n"
-		cols = 'l' * @table[0].size if not draw_table_border_latex
-		cols = '|' + 'l|' * @table[0].size if draw_table_border_latex
-		output << "  \\begin{tabular}{#{cols}}\n"
+		cols = 'X' * @table[0].size if not draw_table_border_latex
+		cols = '|' + 'X|' * @table[0].size if draw_table_border_latex
+		output << "  \\begin{tabularx}{\\textwidth}{#{cols}}\n"
 		output << "   \\hline \n" if draw_table_border_latex
 		@table.each do |row|
 			hline = (draw_table_border_latex ? "\\hline" : '')
 			output << "    #{row.join(' & ')} \\\\ #{hline} \n"
 		end
-		output << "  \\end{tabular}\n"
+		output << "  \\end{tabularx}\n"
+    output << "  \\caption{}\n"
 		output << "\\end{table}\n"
 		output
 	end
@@ -65,7 +77,7 @@ module RedClothExtensionLatex
       end
       minted_settings = %W(mathescape linenos numbersep=5pt frame=lines framesep=2mm tabsize=4 fontsize=\\footnotesize)
                             .join(",")
-      latex_code_text = "<notextile>\\begin{minted}[#{minted_settings}]#{lang}#{code}\n\\end{minted}\n</notextile>"
+      latex_code_text = "<notextile>\\begin{listing}[H]\n\\begin{minted}[#{minted_settings}]#{lang}#{code}\n\\end{minted}\n\\caption{}\n\\end{listing}</notextile>\n"
       latex_code_text
 		end
 	end
