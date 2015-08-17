@@ -71,3 +71,13 @@ Please refer this [Guide](http://www.redmine.org/projects/redmine/wiki/Plugins) 
 ### Configure DocPu plugin
 
 Goto Redmine administration and select Plugins. You should see the DocPu plugin installed. Now select Configure and fill in the correct LaTeX and makeindex binary paths.
+
+![no image there](https://github.com/vvmruder/redmine_doc_pu/blob/master/doc/doc_pu_settings.png "settings dialog")
+
+First you should try to test around a little to check if the set paths are ok and useable for the plugin. You doing so by entering the correct path in the field and clicking the "test" link. A routine will be called by that which try to use the given parameter. Please make sure you do that for all three paths. If everything is ok you should recive the following answers:
+
+for pdflatex binary: ![no image there](https://github.com/vvmruder/redmine_doc_pu/blob/master/doc/doc_pu_settings_latex_test.png "answer for pdflatex binary test")
+
+for makeindex binary: ![no image there](https://github.com/vvmruder/redmine_doc_pu/blob/master/doc/doc_pu_settings_makeindex_test.png "answer for makeindex binary test")
+
+for templates folder: ![no image there](https://github.com/vvmruder/redmine_doc_pu/blob/master/doc/doc_pu_settings_templates_test.png "answer for templates binary test")
