@@ -7,6 +7,8 @@
 %%% *special:* enable code line numbers, set default image resolution to 150 DPI
 %%%
 
+\newcommand{\pagewidth}{210}
+
 % using koma report with a4paper, 11pt fontsize
 \documentclass[a4paper,11pt]{scrreprt}
 % german identifiers (new vocabulary)
@@ -16,12 +18,21 @@
 
 % textile required packages
 \usepackage{minted}
+\usepackage{tabularx}
 \usepackage[normalem]{ulem}
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage{multirow}
 \usepackage{makeidx}
 \usepackage{hyperref}
+
+\hypersetup{
+    colorlinks=true,       % false: boxed links; true: colored links
+    linkcolor=black,          % color of internal links (change box color with linkbordercolor)
+    citecolor=green,        % color of links to bibliography
+    filecolor=magenta,      % color of file links
+    urlcolor=blue           % color of external links
+}
 
 % set default image resolution to 150 DPI
 \pdfimageresolution 150
