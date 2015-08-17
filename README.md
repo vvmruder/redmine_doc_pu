@@ -20,6 +20,7 @@ Features
 * Remove Redmine macros, eg. {{toc}}
 * Convert wiki footnotes to LaTeX footnotes
 * Use floating or fixed images
+* support of three languages (plugin gui) => english, german, bulgarian
 * ...
 
 Dependencies
@@ -81,3 +82,8 @@ for pdflatex binary: ![no image there](https://github.com/vvmruder/redmine_doc_p
 for makeindex binary: ![no image there](https://github.com/vvmruder/redmine_doc_pu/blob/master/doc/doc_pu_settings_makeindex_test.png "answer for makeindex binary test")
 
 for templates folder: ![no image there](https://github.com/vvmruder/redmine_doc_pu/blob/master/doc/doc_pu_settings_templates_test.png "answer for templates binary test")
+
+Most problems are access related. So make sure the redmine running user has the correct rights to read the files/folders.
+
+Please note also that it is possible to set the binarys to the PATH environment variable. If you won't do this. Point the path to the exact place where the binaries are stored.
+
