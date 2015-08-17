@@ -3,7 +3,7 @@ DocPu, Document publishing plugin
 
 This plugin enables PDF export and generation for Redmine wiki pages using the LaTeX typesetting system. But it is even more than an simple PDF exporter since it uses the LaTeX text and figure layout engine.
 
-Originally this redmine plugin was created by Christian Raschko. It was intended to be used for 1.1.x verisions of redmine and below. Since this plugin creates eye catching documents and of cause can be extended a little more I decided to get the code and make it valid for use in redmine 2.6.x versions.
+Originally this redmine plugin was created by Christian Raschko. It was intended to be used for 1.1.x verisions of redmine and below. Since this plugin creates eye catching documents and of cause can be extended a little more I decided to get the code and make it valid for use in __redmine 2.6.x__ versions.
 
 It is still in development mode. So I think all features as described below should work. But there are still some little bugs.
 
@@ -25,7 +25,7 @@ Features
 Dependencies
 ============
 
-DocPu uses and extends the [RedCloth4](http://redcloth.org/) LaTeX export module, which is a converter for the Textile markup language. The system which hosts redmine should also have an working installation of LaTeX. Since the code highlighting is done by pygments, this python package should be installed too.
+DocPu uses and extends the [RedCloth4](http://redcloth.org/) LaTeX export module, which is a converter for the Textile markup language. The system which hosts redmine should also have an working installation of LaTeX. Since the code highlighting is done by pygments, this python package should be installed too. This version of the plugin is made to work with __redmine 2.6.x__. This indicate a dependency to [rails 3.2](http://guides.rubyonrails.org/v3.2.21/3_2_release_notes.html) as you can see [here](http://www.redmine.org/projects/redmine/wiki/RedmineInstall#Ruby-interpreter). For older redmines you can refer to this [version](http://www.redmine.org/plugins/redmine_doc_pu) of the plugin.
 
 Installing RedCloth4
 --------------------
@@ -63,3 +63,11 @@ It's a good idea to test the LaTeX installation before using it with DocPu. Crea
 Output written on article_en_tcfi.pdf (1 page, 28874 bytes).
 ```
 
+Installing DocPu plugin
+-----------------------
+
+Please refer this [Guide](http://www.redmine.org/projects/redmine/wiki/Plugins) to learn how to install an redmine Plugin. Note that you should follow the steps for the 2.x version.
+
+### Configure DocPu plugin
+
+Goto Redmine administration and select Plugins. You should see the DocPu plugin installed. Now select Configure and fill in the correct LaTeX and makeindex binary paths.
