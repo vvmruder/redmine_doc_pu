@@ -130,8 +130,8 @@ You can use all supported font styles from the Redmine wiki such as __bold__, _i
 
 * An enumeration
 * Another enumeration
-..* A sub enumeration
-..* Another sub enumeration
+  * A sub enumeration
+  * Another sub enumeration
 
 And all enumerations are supported.
 
