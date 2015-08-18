@@ -117,3 +117,25 @@ After adding some content to the document you can try to build it by click in th
 ![no image there](https://github.com/vvmruder/redmine_doc_pu/blob/master/doc/doc_pu_publishing_document_build.png "gui while building the document")
 
 After building the doc you can check if it fits your expactations by click on "View document" in the upper left. There you can go back to the documents settings or view the generated LaTeX code also. View the LaTeX code is very helpful if there are some errors. This way you can copy the code and build it by hand on your computer to test whats going on (only recommendable for experienced users).
+
+Now you have tried the general steps to build documents. See the section below to check out what kind of wiki textile formatting is allowed to get an eye catching document generated automatically by this plugin from redmine wikis.
+
+# DocPu wiki syntax
+
+DocPu mainly uses the Redmine/Textile wiki syntax with some minor extensions.
+
+## Font styles and enumeration
+
+You can use all supported font styles from the Redmine wiki such as __bold__, _italic_, underlined (not available in GIThub :) ) or --deleted-- text. Links such as [link](https://github.com/vvmruder/redmine_doc_pu) are also supported.
+
+* An enumeration
+* Another enumeration
+..* A sub enumeration
+..* Another sub enumeration
+
+And all enumerations are supported.
+
+1. Enumeration 1
+2. Enumeration 2
+3. Enumeration 3
+
