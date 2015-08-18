@@ -140,3 +140,21 @@ And all enumerations are supported.
 3. Enumeration 3
   1. Sub-Enumeration 1 
 
+## Images
+
+The image position can be fixed or floated. Fixed images occur at the text position where they are defined. Floating images will be laid out by LaTeX to best fit the page layout guidelines. Also a image caption is supported by using the alternative text field.
+
+* __Fixed images:__ !image.jpg!
+* __Floating images:__ !>image.jpg!
+* __Fixed images with caption:__ !image.jpg!(Caption goes here)
+
+Normally you have the standard LaTeX [image types](https://en.wikibooks.org/wiki/LaTeX/Importing_Graphics#Supported_image_formats) available for use.
+
+## Tables
+
+DocPu supports the Redmine/Textile table syntax with table span and heading.
+
+
+# Template handling
+
+@TODO@
