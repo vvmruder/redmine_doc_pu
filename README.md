@@ -110,8 +110,10 @@ Once you created a new document (fill in all data and check all items you want t
 
 you get a new view. In this you can add wiki pages (only from this project) to the document (please note that the order in the list of wiki pages is the order in the document).
 
-![no image there](https://github.com/vvmruder/redmine_doc_pu/blob/master/doc/doc_pu_publishing_document_settings.png "new document view")
+![no image there](https://github.com/vvmruder/redmine_doc_pu/blob/master/doc/doc_pu_publishing_document_settings.png "the document's settings")
 
-After adding some content to the document you can try to build it by click in the upper left. In the following gui you have a kind of an log window. If you start the build the error are pushed in this window. Normally there should be some "Warnings" or "Bad Box(es)". This isn't tragic. If you want to have an index at the end of your document and enabled it in the document settings-it could be needfully to hit the build process several times (1-3). You should see a decreasing amount of "Warnings".
+After adding some content to the document you can try to build it by click in the upper right. In the following gui you have a kind of an log window. If you start the build the error are pushed in this window. Normally there should be some "Warnings" or "Bad Box(es)". This isn't tragic. If you want to have an index at the end of your document and enabled it in the document settings-it could be needfully to hit the build process several times (1-3). You should see a decreasing amount of "Warnings".
+
+![no image there](https://github.com/vvmruder/redmine_doc_pu/blob/master/doc/doc_pu_publishing_document_build.png "gui while building the document")
 
 After building the doc you can check if it fits your expactations by click on "View document" in the upper left. There you can go back to the documents settings or view the generated LaTeX code also. View the LaTeX code is very helpful if there are some errors. This way you can copy the code and build it by hand on your computer to test whats going on (only recommendable for experienced users).
