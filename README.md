@@ -104,7 +104,13 @@ Now the plugin is ready to go for publishing documents. This plugin is intended 
 
 ![no image there](https://github.com/vvmruder/redmine_doc_pu/blob/master/doc/doc_pu_publishing.png "the project's document list view")
 
-Once you created a new document (fill in all data and check all items you want to be used for this document) you get a new view. In this you can add wiki pages (only from this project) to the document (please note that the order in the list of wiki pages is the order in the document).
+Once you created a new document (fill in all data and check all items you want to be used for this document)
+
+![no image there](https://github.com/vvmruder/redmine_doc_pu/blob/master/doc/doc_pu_publishing_new_document.png "new document view")
+
+you get a new view. In this you can add wiki pages (only from this project) to the document (please note that the order in the list of wiki pages is the order in the document).
+
+![no image there](https://github.com/vvmruder/redmine_doc_pu/blob/master/doc/doc_pu_publishing_document_settings.png "new document view")
 
 After adding some content to the document you can try to build it by click in the upper left. In the following gui you have a kind of an log window. If you start the build the error are pushed in this window. Normally there should be some "Warnings" or "Bad Box(es)". This isn't tragic. If you want to have an index at the end of your document and enabled it in the document settings-it could be needfully to hit the build process several times (1-3). You should see a decreasing amount of "Warnings".
 
