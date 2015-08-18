@@ -3,7 +3,7 @@ DocPu, Document publishing plugin
 
 This plugin enables PDF export and generation for Redmine wiki pages using the LaTeX typesetting system. But it is even more than an simple PDF exporter since it uses the LaTeX text and figure layout engine.
 
-Originally this redmine plugin was created by Christian Raschko (sponsored by ATV-Elektronik). It was intended to be used for 1.1.x verisions of redmine and below. Since this plugin creates eye catching documents and of cause can be extended a little more I decided to get the code and make it valid for use in __redmine 2.6.x__ versions.
+Originally this redmine plugin was created by Christian Raschko (sponsored by [ATV-Elektronik](http://atv-elektronik.co.at/)). It was intended to be used for 1.1.x verisions of redmine and below. Since this plugin creates eye catching documents and of cause can be extended a little more I decided to get the code and make it valid for use in __redmine 2.6.x__ versions.
 
 Mainly all features as described below should work. You may find formatting in Redmine's wiki-syntax which isn't covered yet. If so-feel free to contact me.
 
