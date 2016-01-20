@@ -85,6 +85,8 @@ for makeindex binary: ![no image there](https://github.com/vvmruder/redmine_doc_
 
 for templates folder: ![no image there](https://github.com/vvmruder/redmine_doc_pu/blob/master/doc/doc_pu_settings_templates_test.png "answer for templates binary test")
 
+Your output may look a little different dependend on the versions and packages you use.
+
 Most problems are access related. So make sure the redmine running user has the correct rights to read the files/folders.
 
 Please note also that it is possible to set the binarys to the PATH environment variable. If you won't do this. Point the path to the exact place where the binaries are stored.
@@ -159,4 +161,4 @@ DocPu supports the Redmine/Textile table syntax with table span and heading.
 
 # Template handling
 
-@TODO@
+The templates in the plugins template directory are simply LeTeX-Templates. Please refer to [this](https://en.wikibooks.org/wiki/LaTeX) guide to learn more about LaTeX and how to use it.
