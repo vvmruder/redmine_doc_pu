@@ -100,6 +100,8 @@ Now it's time to set Roles and permissions for the DocPu plugin in Redmine. Ther
 
 The last step is to enable the Document publishing module in the project settings.
 
+### Using the Plugin
+
 Now the plugin is ready to go for publishing documents. This plugin is intended to be used in project scope. So you can have generated documents per project => wiki. If you enbled the module in a project you get a new __publish__ tab. Here you have a list of all your created documents and you can start the creating process itself.
 
 ![no image there](https://github.com/vvmruder/redmine_doc_pu/blob/master/doc/doc_pu_publishing.png "the project's document list view")
