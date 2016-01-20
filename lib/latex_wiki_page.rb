@@ -27,7 +27,7 @@ module ModuleLatexWikiPage
 			page_txt.gsub!(fn, dsk_fn)
 		end
 		
-		# Check wiki referenzes for redirects
+		# Check wiki references for redirects
 		page_txt.gsub!(/(\s|^)\[\[(.*?)(\|(.*?)|)\]\]/i) do |_|
 			ref = $2
 			label = $4
