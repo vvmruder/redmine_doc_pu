@@ -85,7 +85,7 @@ for makeindex binary: ![no image there](https://github.com/vvmruder/redmine_doc_
 
 for templates folder: ![no image there](https://github.com/vvmruder/redmine_doc_pu/blob/master/doc/doc_pu_settings_templates_test.png "answer for templates binary test")
 
-Your output may look a little different dependend on the versions and packages you use.
+Your output may look a little different depending on the versions and packages you use.
 
 Most problems are access related. So make sure the redmine running user has the correct rights to read the files/folders.
 
