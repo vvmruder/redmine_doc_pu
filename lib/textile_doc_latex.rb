@@ -2,7 +2,6 @@ require 'redcloth'
 
 module RedCloth::Formatters::LATEX_EX
 	include RedCloth::Formatters::LATEX
-	
 	def td(opts)
     if opts[:text]
       if opts[:text].include? "\n"
@@ -30,10 +29,12 @@ module RedCloth::Formatters::LATEX_EX
 	end
 
 	def table_close(opts)
-		output  = "\\begin{table}[H]\n"
+		output = "\\begin{savenotes}\n"
+		output << "\\begin{table}[H]\n"
 		output << "  \\centering\n"
 		cols = 'X' * @table[0].size if not draw_table_border_latex
 		cols = '|' + 'X|' * @table[0].size if draw_table_border_latex
+		output << "\\begin{minipage}{\\linewidth}\n"
 		output << "  \\begin{tabularx}{\\textwidth}{#{cols}}\n"
 		output << "   \\hline \n" if draw_table_border_latex
 		@table.each do |row|
@@ -42,7 +43,9 @@ module RedCloth::Formatters::LATEX_EX
 		end
 		output << "  \\end{tabularx}\n"
     output << "  \\caption{}\n"
+		output << "  \\end{minipage}\n"
 		output << "\\end{table}\n"
+		output << "\\end{savenotes}\n"
 		output
 	end
 
@@ -55,7 +58,7 @@ module RedCloth::Formatters::LATEX_EX
 		# Build latex code
 		[ "\\begin{figure}[#{(opts[:align].nil? ? 'H' : 'htb')}]",
 		  "  \\centering",
-		  "  \\includegraphics[#{styling}]{#{opts[:src]}}",
+		  "  \\lwincludegraphics[#{styling}]{#{opts[:src]}}",
 		 ("  \\caption{#{escape opts[:title]}}" if opts[:title]),
 		 ("  \\label{#{opts[:alt]}}" if opts[:alt]),
 		  "\\end{figure}",
@@ -75,9 +78,10 @@ module RedClothExtensionLatex
 				code = $2
 				lang = "{#{$1}}"
       end
-      minted_settings = %W(mathescape linenos numbersep=5pt frame=lines framesep=2mm tabsize=4 fontsize=\\footnotesize)
+      minted_settings = %W(mathescape linenos numbersep=5pt frame=lines framesep=2mm tabsize=4 fontsize=\\footnotesize breaklines)
                             .join(",")
-      latex_code_text = "<notextile>\\begin{listing}[H]\n\\begin{minted}[#{minted_settings}]#{lang}#{code}\n\\end{minted}\n\\caption{}\n\\end{listing}</notextile>\n"
+      puts minted_settings
+      latex_code_text = "<notextile>\\begin{code}\\begin{minted}[#{minted_settings}]#{lang}#{code}\n\\end{minted}\n\\caption{}\n\\end{code}\n</notextile>\n"
       latex_code_text
 		end
 	end
@@ -126,11 +130,11 @@ module RedClothExtensionLatex
 		end
 	end
 
-	def latex_remove_macro(text)
-		text.gsub!(/(\s|^)\{\{(.*?)\}\}/i) do |_|
+  def latex_remove_macro(text)
+    text.gsub!(/(\s|^)\{\{(.*?)\}\}/i) do |_|
       ''
-		end
-	end
+    end
+  end
 end
 
 # Include rules
