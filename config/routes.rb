@@ -1,6 +1,6 @@
 match 'doc_pu', :controller => 'doc_pu', :action => 'index', :via => :get
 match 'doc_pu/new', :controller => 'doc_pu', :action => 'new', :via => [:get, :post]
-match 'doc_pu/edit', :controller => 'doc_pu', :action => 'edit', :via => [:get, :post, :put]
+match 'doc_pu/edit', :controller => 'doc_pu', :action => 'edit', :via => [:get, :post, :patch]
 match 'doc_pu/open', :controller => 'doc_pu', :action => 'open', :via => [:get, :post]
 match 'doc_pu/build', :controller => 'doc_pu', :action => 'build', :via => [:get, :post]
 match 'doc_pu/build_remote', :controller => 'doc_pu', :action => 'build_remote', :via => [:get, :post]
@@ -12,7 +12,7 @@ match 'doc_pu/template', :controller => 'doc_pu', :action => 'template', :via =>
 
 match 'doc_pu_wiki', :controller => 'doc_pu_wiki', :action => 'index', :via => [:get]
 match 'doc_pu_wiki/new', :controller => 'doc_pu_wiki', :action => 'new', :via => [:get, :post]
-match 'doc_pu_wiki/edit', :controller => 'doc_pu_wiki', :action => 'edit', :via => [:get, :post, :put]
+match 'doc_pu_wiki/edit', :controller => 'doc_pu_wiki', :action => 'edit', :via => [:get, :post, :patch]
 match 'doc_pu_wiki/delete', :controller => 'doc_pu_wiki', :action => 'delete', :via => [:get, :post]
 match 'doc_pu_wiki/edit_order', :controller => 'doc_pu_wiki', :action => 'edit_order', :via => [:get, :post]
 
