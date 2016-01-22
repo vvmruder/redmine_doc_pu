@@ -10,7 +10,12 @@ module ModuleLatexFlags
 		:latex_index_emphasis => true,
 		:latex_index_importance => true,
 		:latex_table_border => true,
-		:latex_image_ref => false
+		:latex_image_ref => false,
+		:latex_list_of_listings => false,
+		:latex_list_of_figures => false,
+		:latex_list_of_tables => false,
+		:latex_table_of_contents => false,
+		:latex_generate_index => false
 	}
 	
 	

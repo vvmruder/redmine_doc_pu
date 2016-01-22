@@ -10,7 +10,7 @@ Redmine::Plugin.register :redmine_doc_pu do
 	name 'Redmine DocPu plugin'
 	author 'Christian Raschko'
 	description 'A wiki export and document publishing tool, sponsored by: ATV-Elektronik and modified for further use by: GIS-Fachstelle BL'
-	version '0.0.4'
+	version '2.0.0'
 	url 'https://github.com/vvmruder/redmine_doc_pu'
 	
 	# Settings
@@ -22,7 +22,7 @@ Redmine::Plugin.register :redmine_doc_pu do
 		:partial => 'settings/doc_pu_settings'
 
 	# Redmine version
-	requires_redmine :version_or_higher => '2.6.0'
+	requires_redmine :version_or_higher => '3.2.0'
 
 	# Create project module
 	project_module :doc_pu do

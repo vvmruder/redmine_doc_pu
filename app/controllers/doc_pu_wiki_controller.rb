@@ -17,7 +17,7 @@ class DocPuWikiController < ApplicationController
 		if request.post?
 			# Save object
 			reorder_pages(@doc_pu.doc_pu_wiki_pages.all)
-			@doc_pu_wiki = @doc_pu.doc_pu_wiki_pages.create(checkbox_to_boolean params[:doc_pu_wiki])
+			@doc_pu_wiki = @doc_pu.doc_pu_wiki_pages.create(checkbox_to_boolean params.require(:doc_pu_wiki).permit!)
 			@doc_pu_wiki.wiki_page_order = get_new_page_order()
 			@doc_pu_wiki.wiki_page_version = 0
 			if @doc_pu_wiki.save
@@ -34,7 +34,7 @@ class DocPuWikiController < ApplicationController
 		@doc_pu_wiki = DocPuWikiPage.find(params[:id])
 		if request.put?
 			# Update object
-			@doc_pu_wiki.attributes = checkbox_to_boolean(params[:doc_pu_wiki])
+			@doc_pu_wiki.attributes = checkbox_to_boolean(params.require(:doc_pu_wiki).permit!)
 			if @doc_pu_wiki.save
 				flash[:notice] = t(:flash_page_updated)
 				redirect_to :controller => :doc_pu, :action => :edit, :project_id => @project, :id => @doc_pu

@@ -10,19 +10,20 @@ class DocPuController < ApplicationController
 	
 	# Show all documents
 	def index
-		@documents = DocPuDocument.find_all_by_project_id(@project)
+		@documents = DocPuDocument.where(project_id: @project)
 	end
 
 
 	# Create new document
 	def new
+
 		@templates_list = DocPuTemplates.new(Rails.root.join(Setting.plugin_redmine_doc_pu['template_dir'])).list
 		@doc = DocPuDocument.new
 		@doc.project = @project
 		@doc.user = User.current
 		if request.post?
 			# Save object
-			@doc.attributes = checkbox_to_boolean(params[:doc])
+			@doc.attributes = checkbox_to_boolean(params.require(:doc).permit!)
 			if @doc.save
 				flash[:notice] = t(:flash_document_saved)
 				redirect_to :action => :edit, :project_id => @project, :id => @doc
@@ -34,10 +35,10 @@ class DocPuController < ApplicationController
 
 	# Edit document
 	def edit
-		@doc = DocPuDocument.find(params[:id])		
-		if request.put?
+		@doc = DocPuDocument.find(params[:id])
+		if request.patch?
 			# Update document
-			@doc.attributes = checkbox_to_boolean(params[:doc])
+			@doc.attributes = checkbox_to_boolean(params.require(:doc).permit!)
 			flash[:notice] = t(:flash_document_updated) if @doc.save
     end
 
