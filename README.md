@@ -28,7 +28,7 @@ Features
 Dependencies
 ============
 
-DocPu uses and extends the [RedCloth4](http://redcloth.org/) LaTeX export module, which is a converter for the Textile markup language. The system which hosts redmine should also have an working installation of LaTeX. Since the code highlighting is done by pygments, this python package should be installed too. This version of the plugin is made to work with __redmine 2.6.x__. This indicate a dependency to [rails 3.2](http://guides.rubyonrails.org/v3.2.21/3_2_release_notes.html) as you can see [here](http://www.redmine.org/projects/redmine/wiki/RedmineInstall#Ruby-interpreter). For older redmines you can refer to this [version](http://www.redmine.org/plugins/redmine_doc_pu) of the plugin.
+DocPu uses and extends the [RedCloth4](http://redcloth.org/) LaTeX export module, which is a converter for the Textile markup language. The system which hosts redmine should also have an working installation of LaTeX. Since the code highlighting is done by pygments, this python package should be installed too. This version of the plugin is made to work with __redmine 3.2.x__. This indicate a dependency to [rails 4.2.5](http://guides.rubyonrails.org/4_2_release_notes.html) as you can see [here](http://www.redmine.org/projects/redmine/wiki/RedmineInstall#Ruby-interpreter). For older redmines you can refer to this [version](http://www.redmine.org/plugins/redmine_doc_pu) of the plugin.
 
 List of Dependencies in a quick view:
 * redmine 3.2.0 (tested with ruby 2.0, rails 4.2.5, RedCloth 4.2.9)
@@ -40,7 +40,7 @@ Installing RedCloth4
 
 Currently Redmine uses RedCloth3, so you have to additionally install RedCloth4.
 The simplest solution is by typing gem install RedCloth, but this only works if you have a compiler set-up, since some parts are written in C code.
-For windows users a pre compiled gem package can be downloaded from the repository. Download it first and install it via eg. gem install RedCloth-4.2.2-x86-mswin32-60.gem
+For windows users a pre compiled gem package can be downloaded from the repository.
 
 LaTeX
 -----
@@ -161,6 +161,8 @@ The image position can be fixed or floated. Fixed images occur at the text posit
 * __Fixed images with caption:__ !image.jpg!(Caption goes here)
 
 Normally you have the standard LaTeX [image types](https://en.wikibooks.org/wiki/LaTeX/Importing_Graphics#Supported_image_formats) available for use.
+
+Note that all images are scaled to fit in the text width space with keeping the spect ratio if they are to large for the page.
 
 ## Tables
 
