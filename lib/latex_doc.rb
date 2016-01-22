@@ -64,6 +64,49 @@ module ModuleLatexDoc
 		self.wiki_pages.each do |page|
 			doc_txt += page.to_latex
 		end
+		intro_content = false
+		pre_text = ""
+
+		if self.latex_table_of_contents
+			# Add table of contents to the begin of the document
+			with_table_of_content = "\\tableofcontents\n\n"
+			pre_text << with_table_of_content
+			intro_content = true
+		end
+
+		if self.latex_list_of_figures
+			# Add list of figures to the begin of the document
+			with_list_of_figures = "\\listoffigures\n\n"
+			pre_text << with_list_of_figures
+			intro_content = true
+		end
+
+		if self.latex_list_of_tables
+			# Add list of tables to the begin of the document
+			with_list_of_tables = "\\listoftables\n\n"
+			pre_text << with_list_of_tables
+			intro_content = true
+		end
+
+		if self.latex_list_of_listings
+			# Add list of code listings to the begin of the document
+			with_list_of_listings = "\\listoflistings\n\n"
+			pre_text << with_list_of_listings
+			intro_content = true
+		end
+
+		if intro_content
+			with_roman_numbers = "\n\n\\pagenumbering{roman}\n\n\\setcounter{page}{1}\n\n"
+			pre_text = with_roman_numbers << pre_text
+			pre_text << "\n\n\\cleardoublepage\\pagenumbering{arabic}\n\n\\setcounter{page}{1}\n\n"
+			doc_txt = pre_text << doc_txt
+		end
+
+		if self.latex_generate_index
+			# Add list of code listings to the begin of the document
+			with_index = "\n\n\\printindex"
+			doc_txt << with_index
+		end
 		doc_txt
 	end
 	
