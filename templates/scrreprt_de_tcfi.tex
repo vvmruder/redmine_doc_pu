@@ -15,8 +15,8 @@
 \usepackage[utf8]{inputenc}
 
 % textile required packages
-\usepackage{minted}
-\usepackage{tabularx}
+\usepackage{newfloat}
+\usepackage[newfloat=true]{minted}
 \usepackage{caption}
 \usepackage[normalem]{ulem}
 \usepackage{graphicx}
@@ -24,6 +24,23 @@
 \usepackage{multirow}
 \usepackage{makeidx}
 \usepackage{hyperref}
+\usepackage{tabularx}
+\usepackage{footnote}
+\usepackage{scrhack}
+\makesavenoteenv{tabularx}
+
+\SetupFloatingEnvironment{listing}{name=Code-Beispiel}
+\SetupFloatingEnvironment{listing}{listname=Code-Verzeichnis}
+
+\newenvironment{code}{\captionsetup{type=listing,belowskip=12pt,aboveskip=4pt}}{}
+
+\newcommand{\lwincludegraphics}[2][]{%
+  \sbox{0}{\includegraphics[#1]{#2}}%
+  \ifdim\wd0>\linewidth
+    \resizebox{\linewidth}{!}{\box0 }%
+  \else
+    \leavevmode\box0
+  \fi}
 
 \hypersetup{
     colorlinks=true,       % false: boxed links; true: colored links
@@ -48,22 +65,7 @@
 	% title on the first page
 	\maketitle
 
-	% table of contents
-	\tableofcontents
-
-	% list of figures
-	\listoffigures
-
-	% list of tables
-	\listoftables
-
-	% list of listings
-	\listoflistings
-
 	% input
 	\input{document.tex}
-
-	% print index
-	\printindex
 	
 \end{document}
