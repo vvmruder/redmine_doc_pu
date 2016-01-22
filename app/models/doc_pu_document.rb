@@ -10,7 +10,7 @@ class DocPuDocument < ActiveRecord::Base
 
 	belongs_to :user
 	belongs_to :project
-	has_many :doc_pu_wiki_pages, :dependent => :destroy, :order => 'wiki_page_order'
+	has_many :doc_pu_wiki_pages, :dependent => :destroy
 	
 	validates_presence_of :name, :template, :user_id, :project_id
 	validates_uniqueness_of :name
