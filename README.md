@@ -4,7 +4,7 @@ DocPu, Document publishing plugin
 This plugin enables PDF export and generation for Redmine wiki pages using the LaTeX typesetting system. But it is even more than an simple PDF exporter since it uses the LaTeX text and figure layout engine.
 
 Originally this redmine plugin was created by Christian Raschko (sponsored by [ATV-Elektronik](http://atv-elektronik.co.at/)). It was intended to be used for 1.1.x verisions of redmine and below.
-Since this plugin creates eye catching documents and of cause can be extended a little more I decided to adopt the code and make it valid for use in __redmine 2.6.x__ versions.
+Since this plugin creates eye catching documents and of cause can be extended a little more I decided to adopt the code and make it valid for use in __redmine 3.2.x__ versions.
 
 Mainly all features as described below should work. You may find formatting in Redmine's wiki-syntax which isn't covered yet. If so-feel free to contact me.
 
@@ -28,14 +28,19 @@ Features
 Dependencies
 ============
 
-DocPu uses and extends the [RedCloth4](http://redcloth.org/) LaTeX export module, which is a converter for the Textile markup language. The system which hosts redmine should also have an working installation of LaTeX. Since the code highlighting is done by pygments, this python package should be installed too. This version of the plugin is made to work with __redmine 2.6.x__. This indicate a dependency to [rails 3.2](http://guides.rubyonrails.org/v3.2.21/3_2_release_notes.html) as you can see [here](http://www.redmine.org/projects/redmine/wiki/RedmineInstall#Ruby-interpreter). For older redmines you can refer to this [version](http://www.redmine.org/plugins/redmine_doc_pu) of the plugin.
+DocPu uses and extends the [RedCloth4](http://redcloth.org/) LaTeX export module, which is a converter for the Textile markup language. The system which hosts redmine should also have an working installation of LaTeX. Since the code highlighting is done by pygments, this python package should be installed too. This version of the plugin is made to work with __redmine 3.2.x__. This indicate a dependency to [rails 4.2.5](http://guides.rubyonrails.org/4_2_release_notes.html) as you can see [here](http://www.redmine.org/projects/redmine/wiki/RedmineInstall#Ruby-interpreter). For older redmines you can refer to this [version](http://www.redmine.org/plugins/redmine_doc_pu) of the plugin.
+
+List of Dependencies in a quick view:
+* redmine 3.2.0 (tested with ruby 2.0, rails 4.2.5, RedCloth 4.2.9)
+* Tex (tested with pdfTeX 3.14159265-2.6-1.40.15 (TeX Live 2014))
+  * Packeges which are important due to creation process of the PDF inside the plugin (newfloat, minted, caption, ulem, graphicx, float, multirow, makeidx, hyperref, tabularx, footnote, scrhack)
 
 Installing RedCloth4
 --------------------
 
 Currently Redmine uses RedCloth3, so you have to additionally install RedCloth4.
 The simplest solution is by typing gem install RedCloth, but this only works if you have a compiler set-up, since some parts are written in C code.
-For windows users a pre compiled gem package can be downloaded from the repository. Download it first and install it via eg. gem install RedCloth-4.2.2-x86-mswin32-60.gem
+For windows users a pre compiled gem package can be downloaded from the repository.
 
 LaTeX
 -----
@@ -47,6 +52,7 @@ On Windows machines you can download and install the [MikTex](http://miktex.org/
 
 DocPu Requires the following LaTeX packages, be sure you have them installed as well:
 
+* newfloat
 * tabularx
 * listings
 * ulem
@@ -57,6 +63,8 @@ DocPu Requires the following LaTeX packages, be sure you have them installed as 
 * hyperref
 * minted (IMORTANT: it has to be v2.0 or higher!)
 * caption
+* footnote
+* scrhack
 
 ### Testing LaTeX
 
@@ -154,6 +162,8 @@ The image position can be fixed or floated. Fixed images occur at the text posit
 
 Normally you have the standard LaTeX [image types](https://en.wikibooks.org/wiki/LaTeX/Importing_Graphics#Supported_image_formats) available for use.
 
+Note that all images are scaled to fit in the text width space with keeping the spect ratio if they are to large for the page.
+
 ## Tables
 
 DocPu supports the Redmine/Textile table syntax with table span and heading.
@@ -162,3 +172,11 @@ DocPu supports the Redmine/Textile table syntax with table span and heading.
 # Template handling
 
 The templates in the plugins template directory are simply LeTeX-Templates. Please refer to [this](https://en.wikibooks.org/wiki/LaTeX) guide to learn more about LaTeX and how to use it.
+
+It is really important, that you have a look at the templates which are included in this plugin. There you can have a look how a template must be written to match the criteria set by this plugin. We designed around this pattern several special looking templates, which are working well. You should be able to do so as well. But keep in mind to NOT DELETE/EDIT ANY CONTENT/PACKAGES which is given in this templates. You can copy one of them (keeping all stuff which is in it) and use the copy to add your own styling. Again: If you delete/edit any thing of the given parameters it will probably not work. But you have enough options to build a nice looking template on top of the existing pattern.
+
+# Known Problems
+
+* Footnotes in tables are placed directly under the table and not to the end of the page (this is due to LaTeX-dependet problems => you may google for it).
+* Sometimes the index will not be created well (it helps to build the document 2-3 times again => the number of warnings should decrease)
+* to get rid of the warnings and sometimes the errors it can be helpful to rebuild the document 2-3 times before having a look on the templates (also use the clean function in the build view to delete all generated files if you are facing any problems)
