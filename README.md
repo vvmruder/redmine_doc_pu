@@ -55,7 +55,7 @@ DocPu Requires the following LaTeX packages, be sure you have them installed as 
 * multirow
 * makeidx
 * hyperref
-* minted
+* minted (IMORTANT: it has to be v2.0 or higher!)
 * caption
 
 ### Testing LaTeX

@@ -68,6 +68,8 @@ module RedCloth::Formatters::LATEX_EX
 end
 
 module RedClothExtensionLatex
+  # Solution for RegEx:
+  # http://stackoverflow.com/questions/12493128/regex-replace-text-but-exclude-when-text-is-between-specific-tag
 
 	def latex_code(text)
 		text.gsub!(/<pre>(.*?)<\/pre>/im) do |_|
@@ -78,10 +80,13 @@ module RedClothExtensionLatex
 				code = $2
 				lang = "{#{$1}}"
       end
-      minted_settings = %W(mathescape linenos numbersep=5pt frame=lines framesep=2mm tabsize=4 fontsize=\\footnotesize breaklines)
+      minted_settings = %W(mathescape linenos numbersep=5pt frame=lines framesep=2mm tabsize=4 fontsize=\\footnotesize breaklines breakanywhere)
                             .join(",")
-      puts minted_settings
-      latex_code_text = "<notextile>\\begin{code}\\begin{minted}[#{minted_settings}]#{lang}#{code}\n\\end{minted}\n\\caption{}\n\\end{code}\n</notextile>\n"
+			if lang == '{}'
+				latex_code_text = "<notextile>\n\\begin{code}\n\\begin{minted}\n[#{minted_settings}]\n#{lang}\n#{code}\n\\end{minted}\n\\caption{}\n\\end{code}\n</notextile>\n"
+			else
+				latex_code_text = "<notextile>\n\\begin{code}\n\\begin{minted}\n[#{minted_settings}]\n#{lang}\n#{code}\n\\end{minted}\n\\caption{}\n\\end{code}\n</notextile>\n"
+      end
       latex_code_text
 		end
 	end
@@ -117,21 +122,21 @@ module RedClothExtensionLatex
 	end
 
 	def latex_index_emphasis(text)
-		text.gsub!(/\s_(\w.*?)_/im) do |_|
-			var = $1
-			" <notextile>\\index{#{var}}</notextile> _#{var}_"
-		end
+    text.gsub!((/(?!<notextile[^>]*?>)(\s_(\w.*?)_)([^<])(?![^<]*?<\/notextile>)/im)) do |_|
+      var = $1
+      " <notextile>\\index{#{var}}</notextile> _#{var}_"
+    end
 	end
 
 	def latex_index_importance(text)
-		text.gsub!(/\s\*(\w.*?)\*/im) do |_|
+		text.gsub!(/(?!<notextile[^>]*?>)(\s\*(\w.*?)\*)([^<])(?![^<]*?<\/notextile>)/im) do |_|
 			var = $1
 			" <notextile>\\index{#{var}}</notextile> *#{var}*"
 		end
 	end
 
   def latex_remove_macro(text)
-    text.gsub!(/(\s|^)\{\{(.*?)\}\}/i) do |_|
+    text.gsub!(/(?!<notextile[^>]*?>)((\s|^)\{\{(.*?)\}\})([^<])(?![^<]*?<\/notextile>)/i) do |_|
       ''
     end
   end
