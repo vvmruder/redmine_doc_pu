@@ -124,14 +124,14 @@ module RedClothExtensionLatex
 	def latex_index_emphasis(text)
     text.gsub!((/(?!<notextile[^>]*?>)(\s_(\w.*?)_)([^<])(?![^<]*?<\/notextile>)/im)) do |_|
       var = $1
-      "#{var} <notextile>\\index{#{var}}</notextile>"
+      "#{var} <notextile>\\index{#{var.slice! '_'}}</notextile>"
     end
 	end
 
 	def latex_index_importance(text)
 		text.gsub!(/(?!<notextile[^>]*?>)(\s\*(\w.*?)\*)([^<])(?![^<]*?<\/notextile>)/im) do |_|
 			var = $1
-			"#{var} <notextile>\\index{#{var}}</notextile>"
+			"#{var} <notextile>\\index{#{var.slice! '*'}}</notextile>"
 		end
 	end
 
