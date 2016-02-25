@@ -3,17 +3,17 @@ require 'redcloth'
 module RedCloth::Formatters::LATEX_EX
 	include RedCloth::Formatters::LATEX
 	def td(opts)
-    if opts[:text]
-      if opts[:text].include? "\n"
-        opts[:text] = opts[:text].gsub! "\n", "\\par"
-      end
-      if opts[:text].include? '&'
-        opts[:text] = opts[:text].gsub! '&', '\\\\\\&'
-      end
-      if opts[:text].include? '%'
-        opts[:text] = opts[:text].gsub! '%', '\\\\%'
-      end
-    end
+    # if opts[:text]
+    #   if opts[:text].include? "\n"
+    #     opts[:text] = opts[:text].gsub! "\n", "\\par"
+    #   end
+    #   if opts[:text].include? '&'
+    #     opts[:text] = opts[:text].gsub! '&', '\\\\\\&'
+    #   end
+    #   if opts[:text].include? '%'
+    #     opts[:text] = opts[:text].gsub! '%', '\\\\%'
+    #   end
+    # end
 		opts[:text] = "\\textbf{#{opts[:text]}}" unless opts[:th].nil?
 		column = @table_row.size
 		if opts[:colspan]
