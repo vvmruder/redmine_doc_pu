@@ -2,31 +2,31 @@ require 'redcloth'
 
 module RedCloth::Formatters::LATEX_EX
 	include RedCloth::Formatters::LATEX
-	def td(opts)
-    # if opts[:text]
-    #   if opts[:text].include? "\n"
-    #     opts[:text] = opts[:text].gsub! "\n", "\\par"
-    #   end
-    #   if opts[:text].include? '&'
-    #     opts[:text] = opts[:text].gsub! '&', '\\\\\\&'
-    #   end
-    #   if opts[:text].include? '%'
-    #     opts[:text] = opts[:text].gsub! '%', '\\\\%'
-    #   end
-    # end
-		opts[:text] = "\\textbf{#{opts[:text]}}" unless opts[:th].nil?
-		column = @table_row.size
-		if opts[:colspan]
-			vline = (draw_table_border_latex ? '|c|' : 'c')
-			opts[:text] = "\\multicolumn{#{opts[:colspan]}}{#{vline}}{#{opts[:text]}}"
-		end
-		if opts[:rowspan]
-			@table_multirow_next[column] = opts[:rowspan].to_i - 1
-			opts[:text] = "\\multirow{#{opts[:rowspan]}}{*}{#{opts[:text]}}"
-		end
-		@table_row.push(opts[:text])
-    ''
-	end
+	# def td(opts)
+   #  # if opts[:text]
+   #  #   if opts[:text].include? "\n"
+   #  #     opts[:text] = opts[:text].gsub! "\n", "\\par"
+   #  #   end
+   #  #   if opts[:text].include? '&'
+   #  #     opts[:text] = opts[:text].gsub! '&', '\\\\\\&'
+   #  #   end
+   #  #   if opts[:text].include? '%'
+   #  #     opts[:text] = opts[:text].gsub! '%', '\\\\%'
+   #  #   end
+   #  # end
+	# 	opts[:text] = "\\textbf{#{opts[:text]}}" unless opts[:th].nil?
+	# 	column = @table_row.size
+	# 	if opts[:colspan]
+	# 		vline = (draw_table_border_latex ? '|c|' : 'c')
+	# 		opts[:text] = "\\multicolumn{#{opts[:colspan]}}{#{vline}}{#{opts[:text]}}"
+	# 	end
+	# 	if opts[:rowspan]
+	# 		@table_multirow_next[column] = opts[:rowspan].to_i - 1
+	# 		opts[:text] = "\\multirow{#{opts[:rowspan]}}{*}{#{opts[:text]}}"
+	# 	end
+	# 	@table_row.push(opts[:text])
+   #  ''
+	# end
 
 	def table_close(opts)
 		output = "\\begin{savenotes}\n"
