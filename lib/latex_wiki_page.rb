@@ -53,7 +53,7 @@ module ModuleLatexWikiPage
 
 		if self.latex_add_chapter
 			# Add chapter tag
-			page_txt = "\n\\chapter{#{self.chapter_name}} \\label{page:#{self.wiki_page.title.gsub(' ', '_')}\n" + page_txt
+			page_txt = "\n\\chapter{#{self.chapter_name}} \\label{page:#{self.wiki_page.title.gsub(' ', '_')}}\n" + page_txt
 		else
 			# Add label to first section, if section exists
 			page_txt.sub!(/\\section\{(.+)\}/i) do |_|
