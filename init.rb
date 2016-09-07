@@ -17,7 +17,7 @@ Redmine::Plugin.register :redmine_doc_pu do
 	settings :default => {
                'latex_bin' => 'pdflatex',
                'makeindex_bin' => 'makeindex',
-               'template_dir' => 'vendor/plugins/redmine_doc_pu/templates'
+               'template_dir' => 'plugins/redmine_doc_pu/templates'
            },
 		:partial => 'settings/doc_pu_settings'
 
