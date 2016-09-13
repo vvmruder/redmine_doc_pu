@@ -3,7 +3,7 @@ require 'latex_flags'
 module ModuleLatexWikiPage
 	include ModuleLatexFlags
 	
-	def to_latex()
+	def to_latex
 		# Collect all attached images and get disk filename
 		file_sub = {}
 		self.wiki_page.attachments.each do |att|
@@ -22,7 +22,7 @@ module ModuleLatexWikiPage
 			page_txt = String.new(ver.text)
 		end
 		
-		# Replace alle image filenames with disk filenames
+		# Replace all image filenames with disk filenames
 		file_sub.each do |fn, dsk_fn|
 			page_txt.gsub!(fn, dsk_fn)
 		end
