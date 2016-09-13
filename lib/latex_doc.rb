@@ -9,7 +9,7 @@ module ModuleLatexDoc
 	attr_accessor :latex_template
 	attr_accessor :makeindex_bin
 
-	def version_makeindex()
+	def version_makeindex
 		old_work_dir = Dir.pwd
 		# Change to working directory
 		Dir.chdir(self.work_dir)
@@ -65,7 +65,7 @@ module ModuleLatexDoc
 			doc_txt += page.to_latex
 		end
 		intro_content = false
-		pre_text = ""
+		pre_text = ''
 
 		if self.latex_table_of_contents
 			# Add table of contents to the begin of the document
