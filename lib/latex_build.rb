@@ -3,12 +3,12 @@ class LatexOutputParser
 	attr_accessor :warnings, :errors, :bad_boxes, :pages
 	attr_accessor :warning_lines, :error_lines, :bad_box_lines
 	
-	def initialize()
-		self.reset()
+	def initialize
+		self.reset
 	end
 	
 	def parse(lines)
-		self.reset()
+		self.reset
 		lines.each do |line|
 			parse_line(line)
 		end
@@ -39,7 +39,7 @@ class LatexOutputParser
 		end
 	end
 	
-	def reset()
+	def reset
 		@line_num = 0
 		@warnings = 0
 		@errors = 0
@@ -50,7 +50,7 @@ class LatexOutputParser
 		@bad_box_lines = []
 	end
 
-	def to_s()
+	def to_s
 		"LaTeX-Result: #{@errors} Error(s), #{@warnings} Warning(s), #{@bad_boxes} Bad Box(es), #{@pages} Page(s)"
 	end
 end
@@ -60,7 +60,7 @@ module ModuleLatexBuild
 	attr_accessor :latex_bin, :work_dir
 	attr_accessor :build_log
 	
-	def version()
+	def version
 		f = IO.popen(self.latex_bin + ' --version')
 		f.readlines[0]
 	end
@@ -77,7 +77,7 @@ module ModuleLatexBuild
 			self.build_log = f.readlines
 			f.close
 			
-			par = LatexOutputParser.new()
+			par = LatexOutputParser.new
 			par.parse(self.build_log)
 		ensure
 			# Restore working directory
@@ -113,7 +113,7 @@ module ModuleLatexBuild
 			# Restore working directory
 			Dir.chdir(old_work_dir)
 		end
-		LatexOutputParser.new()
+		LatexOutputParser.new
 	end
 end
 
