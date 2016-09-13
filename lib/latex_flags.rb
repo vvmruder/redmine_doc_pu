@@ -26,7 +26,7 @@ module ModuleLatexFlags
 
 	
 	# Serialize flags
-	def flags_to_str()
+	def flags_to_str
 		flags = Hash.new
 		ModuleLatexFlags::FLAGS.each do |m, _|
 			flags[m] = (self.send(m).nil? ? false : self.send(m))
