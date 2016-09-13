@@ -19,7 +19,7 @@ class LatexTemplate
 		self.update_macros
 	end
 	
-	def update_macros()
+	def update_macros
 		# Replace macros
 		@file_content.sub!(/\\title\{(.*?)\}/i, "\\title{#{doc_title}}") unless @doc_title.nil?
 		@file_content.sub!(/\\author\{(.*?)\}/i, "\\author{#{doc_author}}") unless @doc_author.nil?
@@ -34,7 +34,7 @@ class LatexTemplate
 		f.close
 	end
 	
-	def header()
+	def header
 		@file_content.scan(/^%%%(.*)/)
 	end
 
