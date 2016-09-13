@@ -34,7 +34,7 @@ module RedCloth::Formatters::LATEX_EX
 		output = "\\begin{savenotes}\n"
 		output << "\\begin{table}[H]\n"
 		output << "  \\centering\n"
-		cols = 'X' * @table[0].size if not draw_table_border_latex
+		cols = 'X' * @table[0].size unless draw_table_border_latex
 		cols = '|' + 'X|' * @table[0].size if draw_table_border_latex
 		output << "\\begin{minipage}{\\linewidth}\n"
 		output << "  \\begin{tabularx}{\\textwidth}{#{cols}}\n"
@@ -83,7 +83,7 @@ module RedClothExtensionLatex
 				lang = "{#{$1}}"
       end
       minted_settings = %W(mathescape linenos numbersep=5pt frame=lines framesep=2mm tabsize=4 fontsize=\\footnotesize breaklines breakanywhere)
-                            .join(",")
+                            .join(',')
 			if lang == '{}'
 				latex_code_text = "<notextile>\n\\begin{code}\n\\begin{minted}\n[#{minted_settings}]\n#{lang}\n#{code}\n\\end{minted}\n\\caption{}\n\\end{code}\n</notextile>\n"
 			else
