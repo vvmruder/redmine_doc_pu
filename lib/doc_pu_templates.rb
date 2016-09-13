@@ -17,7 +17,7 @@ class DocPuTemplates < LatexTemplate
 		super(@template_dir + '/' + filename)
 	end
 	
-	def list()
+	def list
 		old_work_dir = Dir.pwd
 		# Change to working directory
 		Dir.chdir(@template_dir)
