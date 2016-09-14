@@ -62,10 +62,17 @@
 \makeindex
 
 \begin{document}
-	% title on the first page
-	\maketitle
+    % to avoid this: http://tex.stackexchange.com/questions/18924/pdftex-warning-ext4-destination-with-the-same-identifier-nam-epage-1-has#18927
+    % note the activating command below the title page if you reconfigure that
+    \hypersetup{pageanchor=false}
+    % title on the first page
+    \maketitle
+    \hypersetup{pageanchor=true}
 
 	% input
 	\input{document.tex}
+
+	% print index
+    \printindex
 	
 \end{document}

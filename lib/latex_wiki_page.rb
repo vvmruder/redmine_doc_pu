@@ -32,9 +32,15 @@ module ModuleLatexWikiPage
 			ref = $2
 			label = $4
 			ref = Wiki.titleize(ref)
-			redir = WikiRedirect.where(title: ref)
-			ref = redir.redirects_to unless redir.nil?
-			" [[#{ref}|#{label}]]"
+      # $latex_logger.error(ref)
+			redir = WikiRedirect.find_by title: ref
+      # $latex_logger.error(redir)
+      unless redir.nil?
+			  ref = redir.redirects_to
+      end
+			ref_text = " [[#{ref}|#{label}]]"
+      # $latex_logger.error(ref_text)
+      ref_text
     end
 		
 		# Collect rules

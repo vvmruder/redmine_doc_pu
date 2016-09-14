@@ -125,6 +125,8 @@ module RedClothExtensionLatex
 		text.gsub!(/(\s|^)\[\[(.*?)(\|(.*?)|)\]\]/i) do |_|
 			var = $2
 			label = $4
+			# $latex_logger.error(label)
+      # $latex_logger.error(var)
 			"<notextile> #{label} \\ref{page:#{var}}</notextile>"
 		end
 	end
@@ -174,18 +176,44 @@ class TextileDocLatex < RedCloth::TextileDoc
 	def remove_notextile(text)
     text.gsub!(/<notextile>(.*?)<\/notextile>/im) do |_|
       notextile_text = $1
-      $latex_logger.error(notextile_text)
+      # $latex_logger.error(notextile_text)
       notextile_text
     end
   end
+
+  def random_string
+    o = [('a'..'z'), ('A'..'Z')].map { |i| i.to_a }.flatten
+    string = (0...50).map { o[rand(o.length)] }.join
+    string
+  end
+
+  def backup_notextile
+    notextile_backup = Hash.new
+    self.gsub!(/<notextile>(.*?)<\/notextile>/im) do |_|
+      key = random_string
+      # $latex_logger.error(key)
+      notextile_backup[key] = $1
+      # $latex_logger.error(notextile_text)
+      key
+    end
+    notextile_backup
+  end
 	
 	def to_latex( *rules )
-    # $latex_logger.error(self)
-		redcloth_text = to(RedCloth::Formatters::LATEX_EX)
+    apply_rules(rules)
+    notextile_backup = backup_notextile
+    redcloth_text = to(RedCloth::Formatters::LATEX_EX)
     extended_text = TextileDocLatex.new(redcloth_text)
-    extended_text.apply_rules(rules)
+    notextile_backup.each do |key, value|
+      extended_text.sub! key, value
+    end
+    extended_text
+    # $latex_logger.error(self)
+		# redcloth_text = to(RedCloth::Formatters::LATEX_EX)
+    # extended_text = TextileDocLatex.new(redcloth_text)
+    # extended_text.apply_rules(rules)
     # $latex_logger.error(extended_text)
-    remove_notextile(extended_text)
+    # remove_notextile(extended_text)
   end
 
   def apply_rules(rules)
