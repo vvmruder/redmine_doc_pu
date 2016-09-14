@@ -65,7 +65,24 @@ module RedCloth::Formatters::LATEX_EX
 		 ("  \\label{#{opts[:alt]}}" if opts[:alt]),
 		  "\\end{figure}",
 		].compact.join "\n"
-	end
+  end
+
+  def code(opts)
+    # $latex_logger.error(opts:text)
+    opts
+  end
+
+  def escape(text)
+    # $latex_logger.error(text)
+    escaped_text = latex_esc(text)
+    # $latex_logger.error(escaped_text)
+    escaped_text
+  end
+
+  def escape_pre(text)
+    # $latex_logger.error(text)
+    text
+  end
 	
 end
 
@@ -80,15 +97,26 @@ module RedClothExtensionLatex
 			lang = '{}'
 			unless $1.nil?
 				code = $2
+        # $latex_logger.error(code)
 				lang = "{#{$1}}"
       end
       minted_settings = %W(mathescape linenos numbersep=5pt frame=lines framesep=2mm tabsize=4 fontsize=\\footnotesize breaklines breakanywhere)
                             .join(',')
 			if lang == '{}'
-				latex_code_text = "<notextile>\n\\begin{code}\n\\begin{minted}\n[#{minted_settings}]\n#{lang}\n#{code}\n\\end{minted}\n\\caption{}\n\\end{code}\n</notextile>\n"
-			else
-				latex_code_text = "<notextile>\n\\begin{code}\n\\begin{minted}\n[#{minted_settings}]\n#{lang}\n#{code}\n\\end{minted}\n\\caption{}\n\\end{code}\n</notextile>\n"
+				lang = 'python'
       end
+      latex_code_text = [
+          '<notextile>',
+          "\\begin{code}",
+          "  \\begin{minted}",
+          "    [#{minted_settings}]#{lang}",
+          "      #{code}",
+          "  \\end{minted}",
+          "  \\caption{}",
+          "\\end{code}",
+          '</notextile>'
+      ].compact.join "\n"
+      # $latex_logger.error(latex_code_text)
       latex_code_text
 		end
 	end
@@ -124,17 +152,10 @@ module RedClothExtensionLatex
 	end
 
 	def latex_index_emphasis(text)
-    text.gsub!((/(?!<notextile[^>]*?>)(\s_(\w.*?)_)([^<])(?![^<]*?<\/notextile>)/im)) do |_|
+    text.gsub!((/(?!<notextile[^>]*?>)(\s\\emph\{(\w.*?)\})([^<])(?![^<]*?<\/notextile>)/im)) do |_|
       var = $1
-      "#{var} <notextile>\\index{#{var.tr '_', ''}}</notextile>"
+      "#{var}<notextile>\\index{#{var}}</notextile> "
     end
-	end
-
-	def latex_index_importance(text)
-		text.gsub!(/(?!<notextile[^>]*?>)(\s\*(\w.*?)\*)([^<])(?![^<]*?<\/notextile>)/im) do |_|
-			var = $1
-			"#{var} <notextile>\\index{#{var.tr '*', ''}}</notextile>"
-		end
 	end
 
   def latex_remove_macro(text)
@@ -149,11 +170,29 @@ RedCloth.include(RedClothExtensionLatex)
 
 class TextileDocLatex < RedCloth::TextileDoc
 	attr_accessor :draw_table_border_latex
+
+	def remove_notextile(text)
+    text.gsub!(/<notextile>(.*?)<\/notextile>/im) do |_|
+      notextile_text = $1
+      $latex_logger.error(notextile_text)
+      notextile_text
+    end
+  end
 	
 	def to_latex( *rules )
-		apply_rules(rules)
-		to(RedCloth::Formatters::LATEX_EX)
-	end
+    # $latex_logger.error(self)
+		redcloth_text = to(RedCloth::Formatters::LATEX_EX)
+    extended_text = TextileDocLatex.new(redcloth_text)
+    extended_text.apply_rules(rules)
+    # $latex_logger.error(extended_text)
+    remove_notextile(extended_text)
+  end
+
+  def apply_rules(rules)
+    rules.each do |r|
+      method(r).call(self) if self.respond_to?(r)
+    end
+  end
 end
 
 

@@ -1,6 +1,8 @@
 require 'latex_build'
 require 'latex_template'
 
+$latex_logger = Logger.new("/opt/redmine/current/textile_doc_latex.log")
+
 module ModuleLatexDoc
 
 	include ModuleLatexBuild
@@ -62,7 +64,9 @@ module ModuleLatexDoc
 	def to_latex
 		doc_txt = ''
 		self.wiki_pages.each do |page|
-			doc_txt += page.to_latex
+      latex_page = page.to_latex
+      # $latex_logger.error(latex_page)
+			doc_txt += latex_page
 		end
 		intro_content = false
 		pre_text = ''
@@ -107,6 +111,7 @@ module ModuleLatexDoc
 			with_index = "\n\n\\printindex"
 			doc_txt << with_index
 		end
+    # $latex_logger.error(doc_txt)
 		doc_txt
 	end
 	

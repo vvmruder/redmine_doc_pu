@@ -35,7 +35,7 @@ module ModuleLatexWikiPage
 			redir = WikiRedirect.where(title: ref)
 			ref = redir.redirects_to unless redir.nil?
 			" [[#{ref}|#{label}]]"
-		end
+    end
 		
 		# Collect rules
 		rules = []
@@ -48,19 +48,20 @@ module ModuleLatexWikiPage
 		rules.push(:latex_remove_macro) if self.latex_remove_macro
 		# Convert page to latex
 		r = TextileDocLatex.new(page_txt)
-		r.draw_table_border_latex = self.latex_table_border
-		page_txt = r.to_latex(*rules)
 
+		r.draw_table_border_latex = self.latex_table_border
+    # $latex_logger.error(r)
+		page_txt = r.to_latex(*rules)
+    # $latex_logger.error(page_txt)
 		if self.latex_add_chapter
 			# Add chapter tag
-			page_txt = "\n\\chapter{#{self.chapter_name}} \\label{page:#{self.wiki_page.title.gsub(' ', '_')}}\n" + page_txt
+			page_txt = "\n\\chapter{#{self.chapter_name}}\\label{page:#{self.wiki_page.title.gsub(' ', '_')}}\n" + page_txt
 		else
 			# Add label to first section, if section exists
 			page_txt.sub!(/\\section\{(.+)\}/i) do |_|
 				"\\section{#{$1}}\\label{page:#{self.wiki_page.title.gsub(' ', '_')}}"
 			end
     end
-
 		page_txt
 	end
 end
