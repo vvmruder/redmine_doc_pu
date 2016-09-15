@@ -57,8 +57,8 @@ List of Dependencies in a quick view:
 Installing RedCloth4
 --------------------
 
-Currently Redmine uses RedCloth3, so you have to additionally install RedCloth4.
-The simplest solution is by typing gem install RedCloth, but this only works if you have a compiler set-up, since some parts are written in C code.
+Currently Redmine ships with RedCloth3, so you have to additionally install RedCloth4.
+The simplest solution is by typing gem install RedCloth or by bundler, but this only works if you have a compiler set-up, since some parts are written in C code.
 For windows users a pre compiled gem package can be downloaded from the repository.
 
 LaTeX
@@ -69,21 +69,7 @@ LaTeX
 
 On Windows machines you can download and install the [MikTex](http://miktex.org/) LaTeX distribution. Four all other platforms see http://www.latex-project.org/ftp.html.
 
-DocPu Requires the following LaTeX packages, be sure you have them installed as well:
-
-* newfloat
-* tabularx
-* listings
-* ulem
-* graphicx
-* float
-* multirow
-* makeidx
-* hyperref
-* minted (IMORTANT: it has to be v2.0 or higher!)
-* caption
-* footnote
-* scrhack
+DocPu Requires the LaTeX packages mentioned above. Be sure you have them installed as well!
 
 ### Testing LaTeX
 
