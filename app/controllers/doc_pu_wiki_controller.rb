@@ -45,17 +45,21 @@ class DocPuWikiController < ApplicationController
 	
 	# Edit page order
 	def edit_order
-		ordered_wikis = @doc_pu.doc_pu_wiki_pages.all
+		ordered_wikis = @doc_pu.doc_pu_wiki_pages.all.order(wiki_page_order: :asc).to_a
 		wiki = DocPuWikiPage.find(params[:id])
 		move_to = params[:doc_pu_wiki][:move_to]
 		ordered_wikis.delete(wiki)
+    # $latex_logger.error(move_to)
+    # $latex_logger.error(ordered_wikis)
 		case move_to
 			when 'highest' then ordered_wikis.insert(0, wiki)
 			when 'lowest' then ordered_wikis.insert(-1, wiki)
 			when 'higher' then ordered_wikis.insert(wiki.wiki_page_order - 1, wiki)
 			when 'lower' then ordered_wikis.insert(wiki.wiki_page_order + 1, wiki)
-		end
+    end
+    # $latex_logger.error(ordered_wikis)
 		reorder_pages(ordered_wikis)
+    # $latex_logger.error(ordered_wikis)
 		redirect_to :controller => :doc_pu, :action => :edit, :project_id => @project, :id => @doc_pu
 	end
 
@@ -83,7 +87,8 @@ class DocPuWikiController < ApplicationController
 				page.wiki_page_order = idx
 				page.save
 				idx += 1
-			end
+      end
+      $latex_logger.error(page)
 		end
 	end
 	

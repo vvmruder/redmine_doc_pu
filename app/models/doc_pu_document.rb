@@ -29,7 +29,7 @@ class DocPuDocument < ActiveRecord::Base
 	
 	# Get wiki pages
 	def wiki_pages
-		self.doc_pu_wiki_pages.all
+		self.doc_pu_wiki_pages.all.order(wiki_page_order: :asc)
 	end
 
 	def get_flags_from_str

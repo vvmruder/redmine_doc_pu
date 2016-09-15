@@ -8,7 +8,7 @@
 		</tr></thead>
 
 		<tbody>
-			<% @doc_pu_wikis.all.each do |page| %> 
+			<% @doc_pu_wikis.all.order(wiki_page_order: :asc).each do |page| %>
 				<tr class="<%= cycle('odd', 'even') %>">
 					<td><%= link_to page.wiki_page.title, {:controller => :doc_pu_wiki, :action => :edit, :project_id => @project, :doc_pu_id => @doc, :id => page} %></td>
 					<td><%= page.chapter_name %></td>
