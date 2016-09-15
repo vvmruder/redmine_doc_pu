@@ -31,9 +31,28 @@ Dependencies
 DocPu uses and extends the [RedCloth4](http://redcloth.org/) LaTeX export module, which is a converter for the Textile markup language. The system which hosts redmine should also have an working installation of LaTeX. Since the code highlighting is done by pygments, this python package should be installed too. This version of the plugin is made to work with __redmine 3.2.x__. This indicate a dependency to [rails 4.2.5](http://guides.rubyonrails.org/4_2_release_notes.html) as you can see [here](http://www.redmine.org/projects/redmine/wiki/RedmineInstall#Ruby-interpreter). For older redmines you can refer to this [version](http://www.redmine.org/plugins/redmine_doc_pu) of the plugin.
 
 List of Dependencies in a quick view:
-* redmine 3.2.0 (tested with ruby 2.0, rails 4.2.5, RedCloth 4.2.9)
-* Tex (tested with pdfTeX 3.14159265-2.6-1.40.15 (TeX Live 2014))
-  * Packeges which are important due to creation process of the PDF inside the plugin (newfloat, minted, caption, ulem, graphicx, float, multirow, makeidx, hyperref, tabularx, footnote, scrhack)
+* redmine 3.2.0 (tested with ruby 2.1.5, rails 4.2.5, RedCloth 4.3.2)
+* Tex (pdfTeX 3.14159265-2.6-1.40.17 (TeX Live 2016)) => medium installer + additional packages below
+  * Packages which are important due to creation process of the PDF inside the plugin:
+   * newfloat
+   * minted
+   * caption
+   * ulem
+   * graphicx
+   * float
+   * multirow
+   * makeidx
+   * hyperref
+   * tabularx
+   * footnote
+   * scrhack
+   * ifplatform
+   * xstring
+   * textpos
+   * fvextra
+   * upquote
+   * framed
+   * xpatch
 
 Installing RedCloth4
 --------------------
