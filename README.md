@@ -33,9 +33,9 @@ DocPu uses and extends the [RedCloth4](http://redcloth.org/) LaTeX export module
 List of Dependencies in a quick view:
 * redmine 3.2.0 (tested with ruby 2.1.5, rails 4.2.5, RedCloth 4.3.2)
 * Tex (pdfTeX 3.14159265-2.6-1.40.17 (TeX Live 2016)) => medium installer + additional packages below
-  * Packages which are important due to creation process of the PDF inside the plugin:
-   * newfloat
-   * minted
+* Packages which are important due to creation process of the PDF inside the plugin:
+    * newfloat
+  * minted
    * caption
    * ulem
    * graphicx
