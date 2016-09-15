@@ -35,24 +35,24 @@ List of Dependencies in a quick view:
 * Tex (pdfTeX 3.14159265-2.6-1.40.17 (TeX Live 2016)) => medium installer + additional packages below
 * Packages which are important due to creation process of the PDF inside the plugin:
     * newfloat
-  * minted
-   * caption
-   * ulem
-   * graphicx
-   * float
-   * multirow
-   * makeidx
-   * hyperref
-   * tabularx
-   * footnote
-   * scrhack
-   * ifplatform
-   * xstring
-   * textpos
-   * fvextra
-   * upquote
-   * framed
-   * xpatch
+    * minted
+    * caption
+    * ulem
+    * graphicx
+    * float
+    * multirow
+    * makeidx
+    * hyperref
+    * tabularx
+    * footnote
+    * scrhack
+    * ifplatform
+    * xstring
+    * textpos
+    * fvextra
+    * upquote
+    * framed
+    * xpatch
 
 Installing RedCloth4
 --------------------
